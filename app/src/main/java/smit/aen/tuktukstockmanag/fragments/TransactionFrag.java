@@ -51,7 +51,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     private Button btnOut;
     private ImageButton btnDate;
 
-    private static TextView txtDate;
+    private static EditText txtDate;
     private EditText txtPName;
     private TextView txtStock;
     private EditText txtQuantity;
@@ -60,6 +60,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     private int mTransType = 0;
     private String prodNumber = null;
     private long availableQuan;
+    private long totalQuan;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
 
         txtPName.setFocusable(false);
         txtPName.setClickable(true);
+        txtDate.setFocusable(false);
         txtPName.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         btnOut.setOnClickListener(this);
@@ -157,9 +159,20 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     private void loadToFirebase() {
         final String name = txtPName.getText().toString();
         final long quan = Long.parseLong(txtQuantity.getText().toString());
-        final long totalQuan = quan + availableQuan;
-        Log.i(TAG, "quantitiy of prod previously "+availableQuan);
-        Log.i(TAG, "new quantity is "+totalQuan);
+        //to check out quantity is less than available quantity
+        if (mTransType==2){
+            if (quan>availableQuan){
+                Toast.makeText(context, "Quantity can't be greater than current stock", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else {
+                totalQuan= availableQuan-quan;
+            }
+        }
+        else {
+            totalQuan = quan + availableQuan;
+        }
+
         String date = txtDate.getText().toString();
         String remark= null;
         if (!(TextUtils.isEmpty(txtRemarks.getText().toString()))){
