@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/productEntryFrag">
+    app:startDestination="@id/testOneFrag">
 
     <fragment
         android:id="@+id/productEntryFrag"
@@ -29,4 +29,14 @@
         android:name="smit.aen.tuktukstockmanag.fragments.ProductListFrag"
         android:label="af_product_list"
         tools:layout="@layout/af_product_list" />
+    <fragment
+        android:id="@+id/transactionListFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.TransactionListFrag"
+        android:label="af_transaction_list"
+        tools:layout="@layout/af_transaction_list" />
+    <fragment
+        android:id="@+id/testOneFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.TestOneFrag"
+        android:label="af_test_onf"
+        tools:layout="@layout/af_test_onf" />
 </navigation>

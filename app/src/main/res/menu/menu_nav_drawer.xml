@@ -12,5 +12,7 @@
         android:id="@+id/productListFrag"
         android:title="Product List"/>
 
-
+    <item
+        android:id="@+id/transactionListFrag"
+        android:title="Transaction List"/>
 </menu>

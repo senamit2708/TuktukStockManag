@@ -57,6 +57,7 @@ public class ProductViewM extends AndroidViewModel {
                                         @Nullable FirebaseFirestoreException e) {
                         if (e!= null){
                             Log.w(TAG, "listen failed "+e);
+                            return;
                         }
                         List<ProductM> productMList = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value){
