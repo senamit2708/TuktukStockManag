@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "87305945382",
+    "firebase_url": "https://tuktukstockmanag.firebaseio.com",
+    "project_id": "tuktukstockmanag",
+    "storage_bucket": "tuktukstockmanag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87305945382:android:b681c1095df26bfd",
+        "android_client_info": {
+          "package_name": "smit.aen.tuktukstockmanag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87305945382-cjp74h0tfoul5dtpr0tfe3ntok564nqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "smit.aen.tuktukstockmanag",
+            "certificate_hash": "f2838f9433b390936e7bad8041f1c28741cb37ab"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwDkBjyhk-18yZWlmyflnyyizRv5VamZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87305945382-m5dspuhmsg457jnskg8hpsq1b31bp896.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

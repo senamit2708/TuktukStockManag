@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productEntryFrag">
+
+    <fragment
+        android:id="@+id/productEntryFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.ProductEntryFrag"
+        android:label="af_product_entry"
+        tools:layout="@layout/af_product_entry" />
+    <fragment
+        android:id="@+id/productSearchListFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.ProductSearchListFrag"
+        android:label="af_product_search_list_frag"
+        tools:layout="@layout/af_product_search_list_frag" />
+    <fragment
+        android:id="@+id/transactionFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.TransactionFrag"
+        android:label="af_transaction"
+        tools:layout="@layout/af_transaction" >
+        <action
+            android:id="@+id/action_transactionFrag_to_productSearchListFrag"
+            app:destination="@id/productSearchListFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.ProductListFrag"
+        android:label="af_product_list"
+        tools:layout="@layout/af_product_list" />
+</navigation>
