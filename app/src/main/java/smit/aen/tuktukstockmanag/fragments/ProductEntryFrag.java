@@ -23,6 +23,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
@@ -71,6 +72,9 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtDes = view.findViewById(R.id.txtDes);
         txtQuantity = view.findViewById(R.id.txtQuantity);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+
+        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_draw));
+
     }
 
     @Override

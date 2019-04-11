@@ -22,7 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:id="@+id/txtRecyclerTitle"
@@ -30,7 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="TextView"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:fontFamily="sans-serif-medium"
                 app:layout_constraintEnd_toEndOf="@+id/txtImageView"
                 app:layout_constraintStart_toStartOf="@+id/txtImageView"

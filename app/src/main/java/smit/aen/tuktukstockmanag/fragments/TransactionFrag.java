@@ -28,6 +28,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -117,6 +118,8 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         txtStock = view.findViewById(R.id.txtStock);
         txtQuantity = view.findViewById(R.id.txtQuantity);
         txtRemarks = view.findViewById(R.id.txtRemarks);
+
+        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_draw));
     }
 
     @Override
@@ -129,13 +132,19 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         }
         if (v==btnIn){
             mTransType = 1;
-            btnIn.setBackgroundColor(Color.GREEN);
+            btnIn.setTextColor(Color.WHITE);
+            btnIn.setBackgroundColor(Color.BLUE);
             btnOut.setBackgroundColor(Color.WHITE);
+            btnOut.setTextColor(Color.BLACK);
         }
         if (v==btnOut){
             mTransType = 2;
             btnOut.setBackgroundColor(Color.RED);
+            btnOut.setTextColor(Color.WHITE);
+
             btnIn.setBackgroundColor(Color.WHITE);
+            btnIn.setTextColor(Color.BLACK);
+
         }
 
         if (v==btnDate){

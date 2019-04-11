@@ -1,6 +1,7 @@
 package smit.aen.tuktukstockmanag.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.TransactionModel;
 import smit.aen.tuktukstockmanag.R;
@@ -33,12 +35,18 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         holder.txtPName.setText(transList.get(position).getName());
         holder.txtPNumber.setText(transList.get(position).getNum());
         holder.txtDate.setText(transList.get(position).getDate());
-        holder.txtQuantity.setText(String.valueOf(transList.get(position).getQuan()));
+        holder.txtQuantity.setText("Quantity: "+String.valueOf(transList.get(position).getQuan()));
         if (transList.get(position).getTrans()==1){
             holder.txtType.setText("IN");
+            holder.cardView.setCardBackgroundColor(Color.BLUE);
+            holder.txtQuantity.setTextColor(Color.BLUE);
         }else {
             holder.txtType.setText("OUT");
+            holder.cardView.setCardBackgroundColor(Color.RED);
+            holder.txtQuantity.setTextColor(Color.RED);
+
         }
+
     }
 
     @Override
@@ -62,6 +70,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         TextView txtDate;
         TextView txtType;
         TextView txtPNumber;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +79,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
             txtPNumber = itemView.findViewById(R.id.txtPNumber);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
             txtType = itemView.findViewById(R.id.txtType);
+            cardView = itemView.findViewById(R.id.cardView);
 
         }
     }

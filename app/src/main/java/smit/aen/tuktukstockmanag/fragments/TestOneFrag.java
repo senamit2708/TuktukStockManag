@@ -40,11 +40,11 @@ public class TestOneFrag extends Fragment implements TopicIFace {
     public void onStart() {
         super.onStart();
         //uncomment the below codes
-        if (!mViewModel.getLogin()){
-            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
-        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
-            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
-        }
+//        if (!mViewModel.getLogin()){
+//            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
+//        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
+//            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
+//        }
     }
 
     @Override
@@ -73,10 +73,10 @@ public class TestOneFrag extends Fragment implements TopicIFace {
     private void loadTopic() {
         List<TopicMain> topicName = new ArrayList<>();
 
-        topicName.add(new TopicMain("Product",R.drawable.ic_product_two));
-        topicName.add(new TopicMain("Transaction",R.drawable.ic_transaction_two));
-        topicName.add(new TopicMain("New Product",R.drawable.ic_add_product));
-        topicName.add(new TopicMain("New Transaction",R.drawable.ic_transaction_one));
+        topicName.add(new TopicMain("Product",R.drawable.ic_product_three));
+        topicName.add(new TopicMain("Transaction",R.drawable.ic_transaction_three));
+        topicName.add(new TopicMain("New Product",R.drawable.ic_product_white));
+        topicName.add(new TopicMain("IN / OUT",R.drawable.ic_transaction_white));
 
         mAdapter.setTopic(topicName);
 
@@ -103,7 +103,7 @@ public class TestOneFrag extends Fragment implements TopicIFace {
             Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_productEntryFrag);
 
         }
-        if (topic.equals("New Transaction")){
+        if (topic.equals("IN / OUT")){
             Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_transactionFrag);
 
         }

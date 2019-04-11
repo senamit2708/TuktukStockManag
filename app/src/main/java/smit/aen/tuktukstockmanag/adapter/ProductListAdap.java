@@ -44,7 +44,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtQuantity.setText("Quantity: "+String.valueOf(productList.get(position).getQuan()));
         holder.txtPNumber.setText("Number: "+productList.get(position).getNum());
-        holder.txtPName.setText("Name: "+productList.get(position).getName());
+        holder.txtPName.setText(productList.get(position).getName());
         holder.txtSPrice.setText("Sell Price: "+String.valueOf(productList.get(position).getsPrice()));
         if (uType==10){
             holder.txtBPrice.setText("Buy Price: "+String.valueOf(productList.get(position).getbPrice()));
