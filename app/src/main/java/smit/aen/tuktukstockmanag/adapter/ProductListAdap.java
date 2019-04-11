@@ -1,6 +1,7 @@
 package smit.aen.tuktukstockmanag.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,17 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
 
     private static final String TAG = ProductListAdap.class.getSimpleName();
     private Context context;
+    private SharedPreferences mSharedPref;
+
 
     private List<ProductM> productList;
     private ProductIface mInterface;
+    private long uType = 0;
 
-    public ProductListAdap(Context context, ProductIface mInterface) {
+    public ProductListAdap(Context context, ProductIface mInterface, long uType) {
         this.context = context;
         this.mInterface = mInterface;
+        this.uType = uType;
     }
 
     @NonNull
@@ -41,7 +46,9 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         holder.txtPNumber.setText("Number: "+productList.get(position).getNum());
         holder.txtPName.setText("Name: "+productList.get(position).getName());
         holder.txtSPrice.setText("Sell Price: "+String.valueOf(productList.get(position).getsPrice()));
-        holder.txtBPrice.setText("Buy Price: "+String.valueOf(productList.get(position).getbPrice()));
+        if (uType==10){
+            holder.txtBPrice.setText("Buy Price: "+String.valueOf(productList.get(position).getbPrice()));
+        }
     }
 
     @Override

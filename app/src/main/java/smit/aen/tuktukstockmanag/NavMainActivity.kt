@@ -1,11 +1,15 @@
 package smit.aen.tuktukstockmanag
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.multidex.MultiDex
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -62,5 +66,16 @@ class NavMainActivity : AppCompatActivity() {
                 Navigation.findNavController(this, R.id.my_nav_host_fragment))
                 || super.onOptionsItemSelected(item)
 
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        MultiDex.install(this)
+    }
+
+    //hide keyboard
+    fun hideSoftKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
     }
 }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/productEntryFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.ProductEntryFrag"
-        android:label="af_product_entry"
+        android:label="Product Entry"
         tools:layout="@layout/af_product_entry" />
     <fragment
         android:id="@+id/productSearchListFrag"
@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/transactionFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.TransactionFrag"
-        android:label="af_transaction"
-        tools:layout="@layout/af_transaction" >
+        android:label="Transaction Entry"
+        tools:layout="@layout/af_transaction">
         <action
             android:id="@+id/action_transactionFrag_to_productSearchListFrag"
             app:destination="@id/productSearchListFrag" />
@@ -27,16 +27,51 @@
     <fragment
         android:id="@+id/productListFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.ProductListFrag"
-        android:label="af_product_list"
+        android:label="Product List"
         tools:layout="@layout/af_product_list" />
     <fragment
         android:id="@+id/transactionListFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.TransactionListFrag"
-        android:label="af_transaction_list"
+        android:label="Transaction List"
         tools:layout="@layout/af_transaction_list" />
     <fragment
         android:id="@+id/testOneFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.TestOneFrag"
-        android:label="af_test_onf"
-        tools:layout="@layout/af_test_onf" />
+        android:label="Stock Managment"
+        tools:layout="@layout/af_test_onf">
+        <action
+            android:id="@+id/action_testOneFrag_to_signInFrag"
+            app:destination="@id/signInFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_productListFrag"
+            app:destination="@id/productListFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_productEntryFrag"
+            app:destination="@id/productEntryFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_transactionFrag"
+            app:destination="@id/transactionFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_transactionListFrag"
+            app:destination="@id/transactionListFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.SignInFrag"
+        android:label="SignIn"
+        tools:layout="@layout/af_signin">
+        <action
+            android:id="@+id/action_signInFrag_to_mobileSignInFrag"
+            app:destination="@id/mobileSignInFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/mobileSignInFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.MobileSignInFrag"
+        android:label="Mobile SignUp"
+        tools:layout="@layout/mobile_signin" />
+    <fragment
+        android:id="@+id/accountFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.AccountFrag"
+        android:label="Account"
+        tools:layout="@layout/af_account" />
 </navigation>

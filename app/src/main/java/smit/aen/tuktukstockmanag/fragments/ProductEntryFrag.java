@@ -24,6 +24,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 
 public class ProductEntryFrag extends Fragment implements View.OnClickListener{
@@ -75,6 +76,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v.getId()==R.id.btnSubmit){
+            ((NavMainActivity)getActivity()).hideSoftKeyboard(v);
             if (!validate()){
                 return;
             }
