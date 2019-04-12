@@ -33,7 +33,11 @@
         android:id="@+id/transactionListFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.TransactionListFrag"
         android:label="Transaction List"
-        tools:layout="@layout/af_transaction_list" />
+        tools:layout="@layout/af_transaction_list" >
+        <action
+            android:id="@+id/action_transactionListFrag_to_productSearchListFrag"
+            app:destination="@id/productSearchListFrag" />
+    </fragment>
     <fragment
         android:id="@+id/testOneFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.TestOneFrag"
