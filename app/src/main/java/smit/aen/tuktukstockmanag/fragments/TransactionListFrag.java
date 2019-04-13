@@ -4,13 +4,19 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Switch;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -45,19 +51,35 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     private ImageButton btnDateFrom;
     private ImageButton btnToDate;
     private ImageButton btnProduct;
+    private Button btnSubmit;
+    private Button btnClear;
+    private Switch btnIn;
+    private Switch btnOut;
 
-    private static TextView txtFromDate;
-    private static TextView txtToDate;
-    private static TextView txtProduct;
+    private static EditText txtFromDate;
+    private static EditText txtToDate;
+    private static EditText txtProduct;
+
+    private TransactionModel product;
+    private String productNumber ="##AMIT##";
+    private static long queryFromDate;
+    private static long queryToDate;
+    private boolean statusIn = true;
+    private boolean statusOut = true;
+    private List<TransactionModel> transListFinal;
 
     private void bindView(View view) {
 
         btnDateFrom = view.findViewById(R.id.btnDateFrom);
         btnToDate = view.findViewById(R.id.btnToDate);
         btnProduct = view.findViewById(R.id.btnProduct);
+        btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnClear = view.findViewById(R.id.btnClear);
         txtFromDate = view.findViewById(R.id.txtFromDate);
         txtToDate = view.findViewById(R.id.txtToDate);
         txtProduct = view.findViewById(R.id.txtProduct);
+        btnIn = view.findViewById(R.id.btnIn);
+        btnOut = view.findViewById(R.id.btnOut);
 
         mRecyclerview = view.findViewById(R.id.recyclerview);
         mAdapter = new TransactionListAdapter();
@@ -90,21 +112,108 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
         btnProduct.setOnClickListener(this);
         btnToDate.setOnClickListener(this);
         btnDateFrom.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
+        txtFromDate.setOnClickListener(this);
+        txtToDate.setOnClickListener(this);
+        txtProduct.setOnClickListener(this);
 
-        mViewModel.getCompleteTransList().observe(this, new Observer<List<TransactionModel>>() {
+
+        txtFromDate.setFocusable(false);
+        txtToDate.setFocusable(false);
+        txtProduct.setFocusable(false);
+        txtFromDate.setClickable(true);
+        txtToDate.setClickable(true);
+        txtProduct.setClickable(true);
+
+
+
+        //this i have used to load all the transactions
+//        mViewModel.getCompleteTransList().observe(this, new Observer<List<TransactionModel>>() {
+//            @Override
+//            public void onChanged(List<TransactionModel> transList) {
+//                mAdapter.setTransList(transList);
+//            }
+//        });
+
+        btnIn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onChanged(List<TransactionModel> transList) {
-                mAdapter.setTransList(transList);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    Log.i(TAG, "inside onchecked method");
+                    statusIn=true;
+                    loadTransTypeList();
+                }else {
+                    statusIn = false;
+                    loadTransTypeList();
+                    Log.i(TAG, "unchecked done ");
+                }
+            }
+        });
+
+        btnOut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    statusOut= true;
+                    loadTransTypeList();
+                }else {
+                    statusOut=false;
+                    loadTransTypeList();
+                }
             }
         });
 
         mProductViewModel.getSelectedProduct().observe(this, new Observer<ProductM>() {
             @Override
             public void onChanged(ProductM product) {
-                txtProduct.setText(product.getName());
-                //TODO: to do changes here
+                if (product!= null){
+                    txtProduct.setText(product.getName());
+                    productNumber = product.getNum();
+                }
             }
         });
+    }
+
+    private void loadTransTypeList() {
+        Log.i(TAG, "statusIn is "+statusIn);
+        Log.i(TAG, "status out is "+statusOut);
+       if (statusIn==true && statusOut==true){
+           Log.i(TAG, "inside both true statement");
+           mAdapter.setTransList(transListFinal);
+       }
+       else if (statusIn==true){
+           loadStatusInList(1);
+
+       }else if (statusOut==true){
+           loadStatusInList(2);
+       }else {
+           loadStatusInList(3);
+           Toast.makeText(context, "Do changes in IN/OUT switch", Toast.LENGTH_SHORT).show();
+       }
+    }
+
+    private void loadStatusInList(int i) {
+        int checkTrans=0;
+        if (i==1){
+             checkTrans = 1;
+        }else if (i==2){
+            checkTrans =2;
+        }else {
+            mAdapter.setTransList(null);
+            return;
+        }
+        List<TransactionModel> newTransList = new ArrayList<>();
+        if (transListFinal!= null){
+            int size = transListFinal.size();
+            for (int j=0; j<size; j++){
+                if (transListFinal.get(j).getTrans()==checkTrans){
+                    newTransList.add(transListFinal.get(j));
+                }
+            }
+            mAdapter.setTransList(newTransList);
+        }
+
     }
 
 
@@ -117,8 +226,73 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
             showDateToPickerDialog();
         }
         if (v==btnProduct){
-            Navigation.findNavController(v).navigate(R.id.action_transactionListFrag_to_productSearchListFrag);
+            selectProduct(v);
         }
+        if (v==btnSubmit){
+//           if (!validate()){
+//               return;
+//           }
+            transactionListLoad();
+        }
+        if (v==btnClear){
+            clearData();
+        }
+        if (v==txtFromDate){
+            showDatePickerDialog();
+        }
+        if (v==txtToDate){
+            showDateToPickerDialog();
+        }
+        if (v==txtProduct){
+            selectProduct(v);
+        }
+    }
+
+    private void selectProduct(View v) {
+        Navigation.findNavController(v).navigate(R.id.action_transactionListFrag_to_productSearchListFrag);
+    }
+
+    private void clearData() {
+        txtFromDate.setText("Select From Date");
+        txtToDate.setText("Select To Date");
+        txtProduct.setText("Product");
+        queryFromDate = 0;
+        queryToDate=0;
+        productNumber ="##AMIT##";
+        mProductViewModel.setSelectedProduct(null);
+    }
+
+    private void transactionListLoad() {
+        String fromDate = txtFromDate.getText().toString();
+        String toDate = txtToDate.getText().toString();
+//        String prodSelected = txtProduct.getText().toString();
+
+        mViewModel.getSelectedTransList(queryFromDate, queryToDate, productNumber).observe(this, new Observer<List<TransactionModel>>() {
+            @Override
+            public void onChanged(List<TransactionModel> transList) {
+                if (transList!= null){
+                    transListFinal = new ArrayList<>();
+                    transListFinal.addAll(transList);
+                    loadTransTypeList();
+                }else {
+                    mAdapter.setTransList(null);
+                }
+
+
+            }
+        });
+    }
+
+    private boolean validate() {
+        boolean status = true;
+        if (txtFromDate.getText().equals("Select From Date")){
+            status = false;
+        }
+        if (txtToDate.getText().equals("Select To Date")){
+            status = false;
+        }
+        return status;
+
     }
 
     private void showDateToPickerDialog() {
@@ -149,8 +323,12 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             String date = dayOfMonth+"-"+(month+1)+"-"+year;
-
             txtFromDate.setText(date);
+            long queryyear = year*10000;
+            long querymonth = (month+1)*100;
+
+            queryFromDate = queryyear+querymonth+dayOfMonth;
+
         }
     }
 
@@ -172,8 +350,11 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             String date = dayOfMonth+"-"+(month+1)+"-"+year;
-
             txtToDate.setText(date);
+            long queryyear = year*10000;
+            long querymonth = (month+1)*100;
+
+            queryToDate = queryyear+querymonth+dayOfMonth;
         }
     }
 }

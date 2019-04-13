@@ -62,6 +62,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     private String prodNumber = null;
     private long availableQuan;
     private long totalQuan;
+    private static long queryDate;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
             if (!validate()){
                 return;
             }
+            btnSubmit.setEnabled(false);
             loadToFirebase();
         }
         if (v==btnIn){
@@ -196,6 +198,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         mainMap.put("trans", mTransType);
         mainMap.put("date", date);
         mainMap.put("num", prodNumber);
+        mainMap.put("queryDate", queryDate);
 
         db.collection("stockColl")
                 .add(mainMap)
@@ -224,6 +227,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     }
 
     private void clearData() {
+        btnSubmit.setEnabled(true);
         mViewModel.setSelectedProduct(null);
         txtQuantity.setText("");
         txtRemarks.setText("");
@@ -274,6 +278,11 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             String date = dayOfMonth+"-"+(month+1)+"-"+year;
+
+            long queryyear = year*10000;
+            long querymonth = (month+1)*100;
+
+            queryDate = queryyear+querymonth+dayOfMonth;
             txtDate.setText(date);
         }
     }
