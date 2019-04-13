@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -36,7 +37,7 @@ public class SignInFrag extends Fragment {
     private EditText txtUserName;
     private EditText txtPassword;
     private Button btnSubmit;
-    private Button btnSignUP;
+//    private Button btnSignUP;
     private LoginViewM mViewModel;
     private SharedPreferences mSharedPref;
     private FirebaseFirestore db;
@@ -194,7 +195,9 @@ public class SignInFrag extends Fragment {
         txtUserName = view.findViewById(R.id.txtUserName);
         txtPassword = view.findViewById(R.id.txtPassword);
         btnSubmit = view.findViewById(R.id.btnSubmit);
-        btnSignUP = view.findViewById(R.id.btnSignUP);
+//        btnSignUP = view.findViewById(R.id.btnSignUP);
+        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.login_button_draw));
+
     }
 
     @Override
