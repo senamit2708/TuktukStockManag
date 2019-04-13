@@ -35,6 +35,7 @@ import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductViewM;
 import smit.aen.tuktukstockmanag.ViewModels.TransactionViewM;
 import smit.aen.tuktukstockmanag.adapter.TransactionListAdapter;
+import smit.aen.tuktukstockmanag.interfaces.TopicIFace;
 
 public class TransactionListFrag extends Fragment implements View.OnClickListener{
 
@@ -62,11 +63,14 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
 
     private TransactionModel product;
     private String productNumber ="##AMIT##";
-    private static long queryFromDate;
-    private static long queryToDate;
+    private static long queryFromDate=0;
+    private static long queryToDate=0;
     private boolean statusIn = true;
     private boolean statusOut = true;
     private List<TransactionModel> transListFinal;
+    //to check submit button is clikced with details..not with previous details
+    private boolean statusFromDate=false;
+    private boolean statusToDate = false;
 
     private void bindView(View view) {
 
@@ -255,17 +259,28 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     private void clearData() {
         txtFromDate.setText("Select From Date");
         txtToDate.setText("Select To Date");
-        txtProduct.setText("Product");
+        txtProduct.setText("Product(optional)");
         queryFromDate = 0;
         queryToDate=0;
         productNumber ="##AMIT##";
         mProductViewModel.setSelectedProduct(null);
+        mAdapter.setTransList(null);
     }
 
     private void transactionListLoad() {
-        String fromDate = txtFromDate.getText().toString();
-        String toDate = txtToDate.getText().toString();
-//        String prodSelected = txtProduct.getText().toString();
+        mAdapter.setTransList(null);
+        if (queryFromDate==0 || queryToDate==0){
+            Toast.makeText(context, "Date should not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ((txtFromDate.getText().toString()).equals("Select From Date") || (txtToDate.getText().toString()).equals("Select To Date")){
+            Toast.makeText(context, "Date should not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (queryToDate<queryFromDate){
+            Toast.makeText(context, "Change 'TO Date' ", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mViewModel.getSelectedTransList(queryFromDate, queryToDate, productNumber).observe(this, new Observer<List<TransactionModel>>() {
             @Override
