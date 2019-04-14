@@ -11,6 +11,8 @@ public class ProductM{
     double sPrice;
     String desc;
     long quan;
+    //for checking product is deleted or not
+    boolean aval;
 
     public ProductM() {
     }

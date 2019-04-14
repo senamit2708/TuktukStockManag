@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
     private List<ProductM> productList;
     private ProductIface mInterface;
     private long uType = 0;
+    private int delCount = 0;
 
     public ProductListAdap(Context context, ProductIface mInterface, long uType) {
         this.context = context;
@@ -72,6 +75,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         TextView txtBPrice;
         TextView txtSPrice;
         TextView txtQuantity;
+        ImageButton btnDel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,15 +84,23 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
             txtPNumber = itemView.findViewById(R.id.txtPNumber);
             txtSPrice = itemView.findViewById(R.id.txtSPrice);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
+            btnDel = itemView.findViewById(R.id.btnDelete);
 
             itemView.setOnClickListener(this);
+            btnDel.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             ProductM product = productList.get(adapterPosition);
-            mInterface.funProduct(product);
+            if (v==btnDel){
+                delCount++;
+                if (delCount>2){
+                    mInterface.funProduct(product);
+                    delCount=0;
+                }
+            }
         }
     }
 }

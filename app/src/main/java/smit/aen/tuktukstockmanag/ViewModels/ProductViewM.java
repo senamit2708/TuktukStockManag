@@ -50,7 +50,8 @@ public class ProductViewM extends AndroidViewModel {
     private void getLiveProductList() {
 
         //real time update with listener
-        Query query = db.collection("ProdColl");
+        Query query = db.collection("ProdColl")
+                .whereEqualTo("aval",true);
             prodListRegistration= query.addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,

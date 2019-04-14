@@ -107,6 +107,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         mainMap.put("sPrice", sPrice);
         mainMap.put("des", description);
         mainMap.put("quan",0);
+        mainMap.put("aval", true);
 
         db.collection("ProdColl")
                 .document(num)

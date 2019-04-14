@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -27,6 +32,7 @@ import smit.aen.tuktukstockmanag.interfaces.ProductIface;
 public class ProductListFrag extends Fragment implements View.OnClickListener, ProductIface {
 
     private static final String TAG = ProductListFrag.class.getSimpleName();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String PREF_UTYPE="userType";
     private static final String PREFERENCE = "preference";
 
@@ -94,7 +100,26 @@ public class ProductListFrag extends Fragment implements View.OnClickListener, P
 
     @Override
     public void funProduct(ProductM product) {
-        mViewModel.setSelectedProduct(product);
+//        mViewModel.setSelectedProduct(product);
+        if (uType==10){
+            db.collection("ProdColl")
+                    .document(product.getNum())
+                    .update("aval", false)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "Product deleted successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Some error occured", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+        }
 
     }
 }
