@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_testOneFrag_to_transactionListFrag"
             app:destination="@id/transactionListFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_productTypeTabFrag"
+            app:destination="@id/productTypeTabFrag" />
     </fragment>
     <fragment
         android:id="@+id/signInFrag"
@@ -89,7 +92,11 @@
         android:id="@+id/productTypeTabFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.ProductTypeTabFrag"
         android:label="af_product_type_tab"
-        tools:layout="@layout/af_product_type_tab" />
+        tools:layout="@layout/af_product_type_tab" >
+        <action
+            android:id="@+id/action_productTypeTabFrag_to_productListByType"
+            app:destination="@id/productListByType" />
+    </fragment>
     <fragment
         android:id="@+id/brandListFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.BrandListFrag"
@@ -100,4 +107,9 @@
         android:name="smit.aen.tuktukstockmanag.fragments.CategotyListFrag"
         android:label="af_category_list"
         tools:layout="@layout/af_category_list" />
+    <fragment
+        android:id="@+id/productListByType"
+        android:name="smit.aen.tuktukstockmanag.fragments.ProductListByType"
+        android:label="af_product_list_by_type"
+        tools:layout="@layout/af_product_list_by_type" />
 </navigation>

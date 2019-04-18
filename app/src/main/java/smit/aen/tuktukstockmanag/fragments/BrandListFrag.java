@@ -43,6 +43,8 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
     private static final String TAG = BrandListFrag.class.getSimpleName();
     private static final String CATEG = "proCategory";
     private static final String FRAG_CHECK = "fragCheck";
+    private static final String SELECT_TYPE = "selectType";
+    private static final String FRAG_TAG = "fragTag";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -152,11 +154,6 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
                         .collection("BrandColl")
                         .document(type);
 
-//        db.collection("ProCatColl")
-//                .document("ProcatDoc")
-//                .collection("BrandColl")
-//                .document(type)
-//                .set(mainmap, SetOptions.merge())
         db.collection("ProCatColl")
                 .document("brandDoc")
                 .update("brand", FieldValue.arrayUnion(type))
@@ -208,6 +205,13 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
         if (mFragCall==1){
             mViewModel.setEnterBrand(topic);
             Navigation.findNavController(getActivity(), R.id.fabAdd).popBackStack();
+        }
+        if (mFragCall==0){
+            Bundle bundle = new Bundle();
+            bundle.putString(SELECT_TYPE, topic);
+            bundle.putInt(FRAG_TAG, 2);
+            Navigation.findNavController(getActivity(), R.id.fabAdd).navigate(R.id.action_productTypeTabFrag_to_productListByType, bundle);
+
         }
     }
 }

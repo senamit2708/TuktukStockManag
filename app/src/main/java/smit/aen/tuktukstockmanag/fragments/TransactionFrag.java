@@ -35,6 +35,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import smit.aen.tuktukstockmanag.Model.ProductM;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductViewM;
 
@@ -120,12 +121,13 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         txtQuantity = view.findViewById(R.id.txtQuantity);
         txtRemarks = view.findViewById(R.id.txtRemarks);
 
-        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_draw));
+        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_selector));
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnSubmit){
+            ((NavMainActivity)getActivity()).hideSoftKeyboard(v);
             if (!validate()){
                 return;
             }
@@ -237,6 +239,10 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         mTransType = 0;
         availableQuan = 0;
         prodNumber = null;
+        btnIn.setBackgroundColor(Color.WHITE);
+        btnIn.setTextColor(Color.BLACK);
+        btnOut.setBackgroundColor(Color.WHITE);
+        btnOut.setTextColor(Color.BLACK);
     }
 
     private boolean validate() {

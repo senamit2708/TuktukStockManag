@@ -42,6 +42,8 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     private static final String TAG = CategotyListFrag.class.getSimpleName();
     private static final String CATEG = "proCategory";
     private static final String FRAG_CHECK = "fragCheck";
+    private static final String SELECT_TYPE = "selectType";
+    private static final String FRAG_TAG = "fragTag";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -206,6 +208,13 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         if (mFragCall==1){
             mViewModel.setEnterCategory(topic);
             Navigation.findNavController(getActivity(), R.id.fabAdd).popBackStack();
+        }
+        if (mFragCall==0){
+            Bundle bundle = new Bundle();
+            bundle.putString(SELECT_TYPE, topic);
+            bundle.putInt(FRAG_TAG, 1);
+            Navigation.findNavController(getActivity(), R.id.fabAdd).navigate(R.id.action_productTypeTabFrag_to_productListByType, bundle);
+
         }
     }
 }

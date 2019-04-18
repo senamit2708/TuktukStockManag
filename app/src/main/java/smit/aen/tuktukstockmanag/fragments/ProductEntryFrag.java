@@ -105,7 +105,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtBrand = view.findViewById(R.id.txtBrand);
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
-        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_draw));
+        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_selector));
 
     }
 
@@ -116,6 +116,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
             if (!validate()){
                 return;
             }
+            btnSubmit.setEnabled(false);
             loadToFirebase();
         }
         if (v==txtBrand){
@@ -212,6 +213,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtDes.setText("");
         mViewModel.setEnterCategory(null);
         mViewModel.setEnterBrand(null);
+        btnSubmit.setEnabled(true);
     }
 
     private boolean validate() {
