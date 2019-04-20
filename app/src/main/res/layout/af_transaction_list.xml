@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/maincardview" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/maincardview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -77,22 +77,37 @@
 
                             <EditText
                                 android:id="@+id/txtFromDate"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="45dp"
-                                android:layout_marginStart="8dp"
+                                android:layout_marginStart="2dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
-                                android:text="Select From Date"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="24sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/btnDateFrom"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@+id/textView12"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.545" />
+
+                            <TextView
+                                android:id="@+id/textView12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="From Date"
+                                android:textColor="@color/colorGray"
+                                android:textSize="24sp"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/txtFromDate"
+                                app:layout_constraintStart_toEndOf="@+id/btnDateFrom" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.MaterialComponents.CardView"
+                    app:cardElevation="16dp"
                         android:id="@+id/cardView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -123,22 +138,36 @@
 
                             <EditText
                                 android:id="@+id/txtToDate"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
+                                android:layout_marginStart="2dp"
                                 android:ems="10"
                                 android:inputType="textPersonName"
-                                android:text="Select To Date"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="24sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/btnToDate"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@+id/textView18"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/textView18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="To Date  "
+                                android:textColor="@color/colorGray"
+                                android:textSize="24sp"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/txtToDate"
+                                app:layout_constraintStart_toEndOf="@+id/btnToDate" />
 
-                    <androidx.cardview.widget.CardView
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.MaterialComponents.CardView"
+                        app:cardElevation="16dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -176,20 +205,21 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:ems="10"
+                                android:hint="Product (optional)"
                                 android:inputType="textPersonName"
-                                android:text="Product (optional)"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="24sp"
+                                android:textColorHint="@color/colorGray"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/btnProduct"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -201,17 +231,20 @@
                     android:layout_height="wrap_content"
                     android:visibility="visible">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSubmit"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:background="@color/colorTest"
                         android:text="Submit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:id="@+id/btnClear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -246,7 +279,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:checked="false" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

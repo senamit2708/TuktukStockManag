@@ -29,6 +29,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -121,7 +122,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         txtQuantity = view.findViewById(R.id.txtQuantity);
         txtRemarks = view.findViewById(R.id.txtRemarks);
 
-        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_selector));
+//        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_selector));
     }
 
     @Override
@@ -136,17 +137,24 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         }
         if (v==btnIn){
             mTransType = 1;
+//            btnIn.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.colorWhite));
+            ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorBlue));
+            ViewCompat.setBackgroundTintList(btnOut, ContextCompat.getColorStateList(context, R.color.colorWhite));
+
+
             btnIn.setTextColor(Color.WHITE);
-            btnIn.setBackgroundColor(Color.BLUE);
-            btnOut.setBackgroundColor(Color.WHITE);
+//            btnIn.setBackgroundColor(Color.BLUE);
+//            btnOut.setBackgroundColor(Color.WHITE);
             btnOut.setTextColor(Color.BLACK);
         }
         if (v==btnOut){
             mTransType = 2;
-            btnOut.setBackgroundColor(Color.RED);
+            ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorWhite));
+            ViewCompat.setBackgroundTintList(btnOut, ContextCompat.getColorStateList(context, R.color.colorGreen));
+//            btnOut.setBackgroundColor(Color.RED);
             btnOut.setTextColor(Color.WHITE);
 
-            btnIn.setBackgroundColor(Color.WHITE);
+//            btnIn.setBackgroundColor(Color.WHITE);
             btnIn.setTextColor(Color.BLACK);
 
         }

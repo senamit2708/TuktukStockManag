@@ -26,7 +26,9 @@
     <color name="colorBlack">#000000</color>
     <color name="colorTry">#5f244d</color>
     <color name="colorBlue">#FF0000FF</color>
-    <color name="colorGray">#FF888888</color>
+    <color name="colorGray">#B7B6B6</color>
     <color name="colorRed">#FFFF0000</color>
     <color name="colorTest">#ff5722</color>
+    <color name="colorGreen">#FF00FF00</color>
+    <color name="colorWhiteGhost">#E1E1E2</color>
 </resources>

@@ -257,9 +257,10 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     }
 
     private void clearData() {
-        txtFromDate.setText("Select From Date");
-        txtToDate.setText("Select To Date");
-        txtProduct.setText("Product(optional)");
+        txtToDate.setText("");
+        txtFromDate.setText("");
+        txtProduct.setText("");
+        txtProduct.setHint("Product(optional)");
         queryFromDate = 0;
         queryToDate=0;
         productNumber ="##AMIT##";

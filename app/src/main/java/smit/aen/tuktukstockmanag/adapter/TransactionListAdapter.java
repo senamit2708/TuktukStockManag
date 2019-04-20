@@ -42,8 +42,8 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
             holder.txtQuantity.setTextColor(Color.BLUE);
         }else {
             holder.txtType.setText("OUT");
-            holder.cardView.setCardBackgroundColor(Color.RED);
-            holder.txtQuantity.setTextColor(Color.RED);
+            holder.cardView.setCardBackgroundColor(Color.GREEN);
+            holder.txtQuantity.setTextColor(Color.GREEN);
 
         }
 
