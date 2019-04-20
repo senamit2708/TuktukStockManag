@@ -1,6 +1,8 @@
 package smit.aen.tuktukstockmanag.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,10 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.adapter.SimpleFragPagerAdap;
 
@@ -59,6 +63,24 @@ public class ProductTypeTabFrag extends Fragment {
         tabLayout = view.findViewById(R.id.tabs);
 //        mAdapter = new SimpleFragPagerAdap(context, getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorBlackForToolbar)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#0B0B0B");
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+        }
     }
 }
 

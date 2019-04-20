@@ -24,6 +24,7 @@
     <color name="textColorFour">#52A9FC</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorBlackForToolbar">#0B0B0B</color>
     <color name="colorTry">#5f244d</color>
     <color name="colorBlue">#FF0000FF</color>
     <color name="colorGray">#B7B6B6</color>
@@ -31,4 +32,5 @@
     <color name="colorTest">#ff5722</color>
     <color name="colorGreen">#FF00FF00</color>
     <color name="colorWhiteGhost">#E1E1E2</color>
+    <color name="colorYellowTab">#F27A0C</color>
 </resources>

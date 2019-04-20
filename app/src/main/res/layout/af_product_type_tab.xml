@@ -20,7 +20,12 @@
         app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.tabs.TabLayout
+            style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:id="@+id/tabs"
+            android:backgroundTint="@color/colorBlackForToolbar"
+            app:tabTextColor="@color/colorWhite"
+            app:tabIndicatorColor="@color/colorYellowTab"
+            app:tabSelectedTextColor="@color/colorYellowTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible">

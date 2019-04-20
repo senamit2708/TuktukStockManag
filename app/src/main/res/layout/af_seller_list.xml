@@ -24,9 +24,10 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:visibility="visible"
+        app:backgroundTint="@color/colorBlackForToolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_circle" />
+        app:srcCompat="@drawable/ic_add_circle_three" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/proAddCard"
