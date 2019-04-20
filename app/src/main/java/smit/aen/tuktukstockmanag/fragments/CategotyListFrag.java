@@ -57,6 +57,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     private FloatingActionButton fabAdd;
     private EditText txtType;
     private Button btnAdd;
+    private Button btnCross;
     private CardView proAddCard;
     private String type;
     private int mFragCall=0;
@@ -91,6 +92,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         bindView(view);
         fabAdd.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
+        btnCross.setOnClickListener(this);
 
 
         mViewModel.getTypeList().observe(this, new Observer<List<String>>() {
@@ -111,6 +113,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         fabAdd = view.findViewById(R.id.fabAdd);
         txtType = view.findViewById(R.id.txtType);
         btnAdd = view.findViewById(R.id.btnAdd);
+        btnCross = view.findViewById(R.id.btnCross);
         proAddCard = view.findViewById(R.id.proAddCard);
     }
 
@@ -124,6 +127,16 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
             ((NavMainActivity)getActivity()).hideSoftKeyboard(v);
             getDetails();
         }
+        if (v==btnCross){
+            reLoadDetails();
+        }
+    }
+
+    private void reLoadDetails() {
+        proAddCard.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        btnCross.setVisibility(View.INVISIBLE);
+        fabAdd.show();
     }
 
     private void getDetails() {
@@ -137,8 +150,11 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     }
 
     private void loadCard() {
+//        fabAdd.setEnabled(false);
         mRecyclerView.setVisibility(View.INVISIBLE);
         proAddCard.setVisibility(View.VISIBLE);
+        btnCross.setVisibility(View.VISIBLE);
+        fabAdd.hide();
     }
 
     private void loadToFirebase() {
@@ -168,8 +184,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
-                                        proAddCard.setVisibility(View.INVISIBLE);
-                                        mRecyclerView.setVisibility(View.VISIBLE);
+                                      reLoadDetails();
                                     }
                                 });
                     }
