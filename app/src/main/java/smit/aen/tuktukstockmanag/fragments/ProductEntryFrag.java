@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,23 +27,28 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import smit.aen.tuktukstockmanag.Model.ProductM;
 import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductTypeViewM;
+import smit.aen.tuktukstockmanag.ViewModels.ProductWithTypeViewM;
 
 public class ProductEntryFrag extends Fragment implements View.OnClickListener{
 
     private static final String TAG = ProductEntryFrag.class.getSimpleName();
+    private static final String ENTRY_CHECK_FRAG = "entryCheck";
     private static final String FRAG_CHECK = "fragCheck";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Context context;
     private ProductTypeViewM mViewModel;
+    private ProductWithTypeViewM mProViewModel;
 
     private EditText txtPName;
     private EditText txtPNumber;
@@ -52,11 +58,18 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
     private EditText txtCategory;
     private EditText txtBrand;
     private Button btnSubmit;
+    private ConstraintLayout mConsLayout;
+
+    private int mEditStatus=1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(ProductTypeViewM.class);
+        mProViewModel = ViewModelProviders.of(getActivity()).get(ProductWithTypeViewM.class);
+        mEditStatus = getArguments().getInt(ENTRY_CHECK_FRAG, 1);
+
+
     }
 
     @Nullable
@@ -71,6 +84,10 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bindView(view);
+
+        if (mEditStatus==2){
+            entryPreviousDetail();
+        }
 
         txtBrand.setClickable(true);
         txtCategory.setClickable(true);
@@ -95,6 +112,25 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
 
     }
 
+    private void entryPreviousDetail() {
+         mProViewModel.getProductForEdit().observe(this, new Observer<ProductM>() {
+             @Override
+             public void onChanged(ProductM productM) {
+                 enterPrevious(productM);
+             }
+         });
+    }
+
+    private void enterPrevious(ProductM product) {
+        txtPName.setText(product.getName());
+        txtPNumber.setText(product.getNum());
+        txtDes.setText(product.getDesc());
+        txtBRate.setText(String.valueOf(product.getbPrice()));
+        txtSPrice.setText(String.valueOf(product.getsPrice()));
+        txtCategory.setText(product.getCat());
+        txtBrand.setText(product.getBrand());
+    }
+
     private void bindView(View view) {
         txtPName = view.findViewById(R.id.txtPName);
         txtPNumber =view.findViewById(R.id.txtPNumber);
@@ -104,9 +140,9 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtCategory = view.findViewById(R.id.txtCategory);
         txtBrand = view.findViewById(R.id.txtBrand);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        mConsLayout = view.findViewById(R.id.constraintLayout);
 
         btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_selector));
-
     }
 
     @Override
@@ -190,7 +226,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
                                         Log.i(TAG, "category updated succeessfully");
                                     }
                                 });
-                        Toast.makeText(context, "Product Entered Successfully ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Product Entered Successfully ", Toast.LENGTH_SHORT).show();
                         clearDetails();
                     }
                 })
@@ -206,6 +242,8 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
     }
 
     private void clearDetails() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Product added Successfully", Snackbar.LENGTH_SHORT);
+        snackbar.show();
         txtPName.setText("");
         txtPNumber.setText("");
         txtSPrice.setText("");

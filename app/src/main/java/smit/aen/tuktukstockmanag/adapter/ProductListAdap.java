@@ -2,6 +2,7 @@ package smit.aen.tuktukstockmanag.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.ProductM;
 import smit.aen.tuktukstockmanag.R;
+import smit.aen.tuktukstockmanag.interfaces.ProEditIface;
 import smit.aen.tuktukstockmanag.interfaces.ProductIface;
 
 public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHolder> {
@@ -26,12 +28,14 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
 
     private List<ProductM> productList;
     private ProductIface mInterface;
+    private ProEditIface mEditIface;
     private long uType = 0;
     private int delCount = 0;
 
-    public ProductListAdap(Context context, ProductIface mInterface, long uType) {
+    public ProductListAdap(Context context, ProductIface mInterface,ProEditIface mEditIface, long uType) {
         this.context = context;
         this.mInterface = mInterface;
+        this.mEditIface = mEditIface;
         this.uType = uType;
     }
 
@@ -76,6 +80,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         TextView txtSPrice;
         TextView txtQuantity;
         ImageButton btnDel;
+        ImageButton btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,9 +90,11 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
             txtSPrice = itemView.findViewById(R.id.txtSPrice);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
             btnDel = itemView.findViewById(R.id.btnDelete);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
 
             itemView.setOnClickListener(this);
             btnDel.setOnClickListener(this);
+            btnEdit.setOnClickListener(this);
         }
 
         @Override
@@ -100,6 +107,9 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
                     mInterface.funProduct(product);
                     delCount=0;
                 }
+            }
+            if (v==btnEdit){
+                mEditIface.funEditPro(product);
             }
         }
     }

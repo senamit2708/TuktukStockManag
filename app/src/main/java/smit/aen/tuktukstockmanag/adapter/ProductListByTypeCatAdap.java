@@ -57,6 +57,7 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
 
     public void setType(List<String> typeList) {
         this.typeList = typeList;
+        clickedItemPos=-1;
         notifyDataSetChanged();
     }
 

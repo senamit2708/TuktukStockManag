@@ -32,9 +32,10 @@ import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductViewM;
 import smit.aen.tuktukstockmanag.adapter.ProductListAdap;
 import smit.aen.tuktukstockmanag.adapter.ProductSearchListAdap;
+import smit.aen.tuktukstockmanag.interfaces.ProEditIface;
 import smit.aen.tuktukstockmanag.interfaces.ProductIface;
 
-public class ProductListFrag extends Fragment implements View.OnClickListener, ProductIface {
+public class ProductListFrag extends Fragment implements View.OnClickListener, ProductIface, ProEditIface {
 
     private static final String TAG = ProductListFrag.class.getSimpleName();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -52,6 +53,7 @@ public class ProductListFrag extends Fragment implements View.OnClickListener, P
     private ProductViewM mViewModel;
     private long uType=0;
     private int adminType=0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +94,7 @@ public class ProductListFrag extends Fragment implements View.OnClickListener, P
     private void bindView(View view) {
         btnHide = view.findViewById(R.id.btnHide);
         mRecyclerView = view.findViewById(R.id.recyclerview);
-        mAdapter = new ProductListAdap(context, this, uType);
+        mAdapter = new ProductListAdap(context, this,this, uType);
         mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -146,5 +148,10 @@ public class ProductListFrag extends Fragment implements View.OnClickListener, P
             ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
             ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
         }
+    }
+
+    @Override
+    public void funEditPro(ProductM product) {
+
     }
 }

@@ -32,6 +32,7 @@ import smit.aen.tuktukstockmanag.interfaces.TopicIFace;
 public class TestOneFrag extends Fragment implements TopicIFace {
 
     private static final String TAG = TestOneFrag.class.getSimpleName();
+    private static final String ENTRY_CHECK_FRAG = "entryCheck";
     private LoginViewM mViewModel;
     private Context context;
 
@@ -108,7 +109,9 @@ public class TestOneFrag extends Fragment implements TopicIFace {
 
         }
         if (topic.equals("New Product")){
-            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_productEntryFrag);
+            Bundle bundle1 = new Bundle();
+            bundle1.putInt(ENTRY_CHECK_FRAG, 1);
+            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_productEntryFrag, bundle1);
 
         }
         if (topic.equals("IN / OUT")){

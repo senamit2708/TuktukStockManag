@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +27,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -60,6 +62,8 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
     private Button btnAdd;
     private Button btnCross;
     private CardView proAddCard;
+    private ConstraintLayout mConsLayout;
+
     private String type;
     private int mFragCall=0;
 
@@ -112,6 +116,7 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
         btnAdd = view.findViewById(R.id.btnAdd);
         btnCross = view.findViewById(R.id.btnCross);
         proAddCard = view.findViewById(R.id.proAddCard);
+        mConsLayout = view.findViewById(R.id.constraintLayout);
     }
 
     @Override
@@ -124,11 +129,15 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
             getDetails();
         }
         if (v==btnCross){
+            ((NavMainActivity)getActivity()).hideSoftKeyboard(v);
             reLoadDetails();
         }
     }
 
     private void reLoadDetails() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Brand Entered Successfully ", Snackbar.LENGTH_SHORT);
+        snackbar.show();
+        txtType.setText("");
         proAddCard.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         btnCross.setVisibility(View.INVISIBLE);
@@ -174,11 +183,11 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        docRefBrand.set(mainmap)
+                        docRefBrand.set(mainmap, SetOptions.merge())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
                                         reLoadDetails();
                                     }
                                 });

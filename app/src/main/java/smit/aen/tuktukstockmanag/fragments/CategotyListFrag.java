@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +29,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -62,6 +64,8 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     private Button btnAdd;
     private Button btnCross;
     private CardView proAddCard;
+    private ConstraintLayout mConsLayout;
+
     private String type;
     private int mFragCall=0;
 
@@ -118,6 +122,8 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         btnAdd = view.findViewById(R.id.btnAdd);
         btnCross = view.findViewById(R.id.btnCross);
         proAddCard = view.findViewById(R.id.proAddCard);
+
+        mConsLayout = view.findViewById(R.id.constraintLayout);
     }
 
 
@@ -131,11 +137,16 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
             getDetails();
         }
         if (v==btnCross){
+            ((NavMainActivity)getActivity()).hideSoftKeyboard(v);
             reLoadDetails();
         }
     }
 
     private void reLoadDetails() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
+        snackbar.show();
+        txtType.setText("");
         proAddCard.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         btnCross.setVisibility(View.INVISIBLE);
@@ -182,11 +193,11 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        docRefCat.set(mainmap)
+                        docRefCat.set(mainmap, SetOptions.merge())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
                                       reLoadDetails();
                                     }
                                 });

@@ -8,9 +8,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -18,8 +16,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -34,6 +30,8 @@ public class ProductWithTypeViewM extends AndroidViewModel {
 
     private MutableLiveData<List<String>> mTypeList;
     private MutableLiveData<List<ProductM>> mProductList;
+
+    private MutableLiveData<ProductM> mProductForEdit = new MutableLiveData<>();
 
     private ListenerRegistration prodListReg;
 
@@ -127,24 +125,24 @@ public class ProductWithTypeViewM extends AndroidViewModel {
         Query query = null;
 
          if (fragType==1){
-             if ( selectedItem.equals("none")){
+             if ( selectedItem.equals("allProduct")){
                  query = db.collection("ProdColl")
-                         .whereEqualTo("cat", type);
+                         .whereEqualTo("cat", type).whereEqualTo("aval", true);
              }else {
                  query = db.collection("ProdColl")
                          .whereEqualTo("cat", type)
-                         .whereEqualTo("brand", selectedItem);
+                         .whereEqualTo("brand", selectedItem).whereEqualTo("aval", true);
              }
 
         }
         if (fragType==2){
-            if ( selectedItem.equals("none")){
+            if ( selectedItem.equals("allProduct")){
                 query = db.collection("ProdColl")
-                        .whereEqualTo("brand", type);
+                        .whereEqualTo("brand", type).whereEqualTo("aval", true);
             }else {
                 query = db.collection("ProdColl")
                         .whereEqualTo("brand", type)
-                        .whereEqualTo("cat", selectedItem);
+                        .whereEqualTo("cat", selectedItem).whereEqualTo("aval", true);
             }
 
         }
@@ -163,8 +161,10 @@ public class ProductWithTypeViewM extends AndroidViewModel {
                               long quan = doc.getLong("quan");
                               double bPrice = doc.getDouble("bPrice");
                               double sPrice = doc.getDouble("sPrice");
+                              String cat = doc.getString("cat");
+                              String brand = doc.getString("brand");
 
-                              productMList.add(new ProductM(name, num, bPrice, sPrice, des, quan));
+                              productMList.add(new ProductM(name, num, bPrice, sPrice, des, quan, brand, cat));
                           }
                           mProductList.setValue(productMList);
 
@@ -200,5 +200,15 @@ public class ProductWithTypeViewM extends AndroidViewModel {
 //            }
 //        });
 
+    }
+
+
+
+    public void setProductForEdit(ProductM product) {
+        mProductForEdit.setValue(product);
+    }
+
+    public LiveData<ProductM> getProductForEdit() {
+        return mProductForEdit;
     }
 }

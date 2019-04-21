@@ -111,5 +111,9 @@
         android:id="@+id/productListByType"
         android:name="smit.aen.tuktukstockmanag.fragments.ProductListByType"
         android:label="Products"
-        tools:layout="@layout/af_product_list_by_type" />
+        tools:layout="@layout/af_product_list_by_type" >
+        <action
+            android:id="@+id/action_productListByType_to_productEntryFrag"
+            app:destination="@id/productEntryFrag" />
+    </fragment>
 </navigation>

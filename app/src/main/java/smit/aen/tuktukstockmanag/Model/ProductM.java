@@ -13,6 +13,8 @@ public class ProductM{
     long quan;
     //for checking product is deleted or not
     boolean aval;
+    String brand;
+    String cat;
 
     public ProductM() {
     }
@@ -24,6 +26,17 @@ public class ProductM{
         this.sPrice = sPrice;
         this.desc = desc;
         this.quan = quan;
+    }
+
+    public ProductM(String name, String num, double bPrice, double sPrice, String desc, long quan, String brand, String cat) {
+        this.name = name;
+        this.num = num;
+        this.bPrice = bPrice;
+        this.sPrice = sPrice;
+        this.desc = desc;
+        this.quan = quan;
+        this.brand = brand;
+        this.cat = cat;
     }
 
     public long getQuan() {
@@ -72,5 +85,21 @@ public class ProductM{
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 }

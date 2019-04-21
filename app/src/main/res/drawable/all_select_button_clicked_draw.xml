@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners
+        android:bottomRightRadius="32dp"/>
+
+
+    <solid
+        android:color="@color/colorYellowTab"/>
+    <!--<size-->
+    <!--android:height="w"-->
+    <!--android:width="100dp"/>-->
+
+</shape>
