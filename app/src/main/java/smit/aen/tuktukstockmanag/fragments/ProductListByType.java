@@ -1,6 +1,8 @@
 package smit.aen.tuktukstockmanag.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +13,14 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.ProductM;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductWithTypeViewM;
 import smit.aen.tuktukstockmanag.adapter.ProductListAdap;
@@ -114,5 +118,25 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     @Override
     public void funProduct(ProductM product) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "inside on start method");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorBlackForToolbar)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#0B0B0B");
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "inside onstop method");
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+//            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+//        }
     }
 }

@@ -110,6 +110,6 @@
     <fragment
         android:id="@+id/productListByType"
         android:name="smit.aen.tuktukstockmanag.fragments.ProductListByType"
-        android:label="af_product_list_by_type"
+        android:label="Products"
         tools:layout="@layout/af_product_list_by_type" />
 </navigation>

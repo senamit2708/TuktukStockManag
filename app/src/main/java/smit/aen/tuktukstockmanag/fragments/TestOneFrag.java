@@ -1,6 +1,8 @@
 package smit.aen.tuktukstockmanag.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.TopicMain;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.LoginViewM;
 import smit.aen.tuktukstockmanag.adapter.TestOneAdap;
@@ -45,6 +49,10 @@ public class TestOneFrag extends Fragment implements TopicIFace {
 //        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
 //            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
 //        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+        }
     }
 
     @Override

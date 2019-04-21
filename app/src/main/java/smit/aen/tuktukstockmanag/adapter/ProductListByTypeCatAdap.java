@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.interfaces.TopicIFace;
@@ -17,6 +18,7 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
 
     private static final String TAG = ProductListByTypeCatAdap.class.getSimpleName();
     private Context context;
+    private int clickedItemPos=-1;
     private TopicIFace mInterface;
     private List<String> typeList;
 
@@ -36,6 +38,11 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtType.setText(typeList.get(position));
+        if (clickedItemPos==position){
+            holder.cardview.setCardBackgroundColor(context.getResources().getColor(R.color.colorYellowTab));
+        }else {
+            holder.cardview.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
+        }
     }
 
     @Override
@@ -43,6 +50,7 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
         if (typeList!= null){
             return typeList.size();
         }else {
+            clickedItemPos=-1;
             return 0;
         }
     }
@@ -55,10 +63,12 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView txtType;
+        CardView cardview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtType = itemView.findViewById(R.id.txtType);
+            cardview = itemView.findViewById(R.id.cardview);
 
             itemView.setOnClickListener(this);
         }
@@ -68,6 +78,8 @@ public class ProductListByTypeCatAdap extends RecyclerView.Adapter<ProductListBy
             int adapterPosition = getAdapterPosition();
             String topic = typeList.get(adapterPosition);
             mInterface.funTopicName(topic);
+            clickedItemPos = adapterPosition;
+            notifyDataSetChanged();
 
         }
     }

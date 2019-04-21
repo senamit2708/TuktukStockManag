@@ -1,6 +1,8 @@
 package smit.aen.tuktukstockmanag.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +28,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -210,6 +213,13 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         super.onPause();
         Log.i(TAG, "inside onpause method");
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+
 
     @Override
     public void onStop() {

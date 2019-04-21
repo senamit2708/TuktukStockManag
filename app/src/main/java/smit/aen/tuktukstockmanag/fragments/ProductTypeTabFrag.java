@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class ProductTypeTabFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 //        bindView(view);
 
+
         mViewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -68,19 +70,32 @@ public class ProductTypeTabFrag extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i(TAG, "inside on start ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorBlackForToolbar)));
             ((NavMainActivity)getActivity()).updateStatusBarColor("#0B0B0B");
         }
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "inside on pause method");
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+//            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+//        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
-            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
-        }
+        Log.i(TAG, "inside onstop");
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+//            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+//        }
     }
 }
 
