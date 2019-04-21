@@ -135,8 +135,6 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
     }
 
     private void reLoadDetails() {
-        Snackbar snackbar = Snackbar.make(mConsLayout, "Brand Entered Successfully ", Snackbar.LENGTH_SHORT);
-        snackbar.show();
         txtType.setText("");
         proAddCard.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
@@ -187,7 +185,7 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-//                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
+                                        snackBarShow();
                                         reLoadDetails();
                                     }
                                 });
@@ -202,6 +200,14 @@ public class BrandListFrag extends Fragment implements View.OnClickListener, Top
                 });
 
 
+    }
+    private void snackBarShow() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
+//        TextView textView = snackbarView.findViewById(android.su)
+        snackbar.show();
     }
     @Override
     public void onResume() {

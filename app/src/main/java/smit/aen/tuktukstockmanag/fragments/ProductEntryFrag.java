@@ -226,7 +226,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
                                         Log.i(TAG, "category updated succeessfully");
                                     }
                                 });
-//                        Toast.makeText(context, "Product Entered Successfully ", Toast.LENGTH_SHORT).show();
+                        snackBarShow();
                         clearDetails();
                     }
                 })
@@ -240,10 +240,17 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
 
 
     }
+    private void snackBarShow() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
+//        TextView textView = snackbarView.findViewById(android.su)
+        snackbar.show();
+    }
 
     private void clearDetails() {
-        Snackbar snackbar = Snackbar.make(mConsLayout, "Product added Successfully", Snackbar.LENGTH_SHORT);
-        snackbar.show();
+
         txtPName.setText("");
         txtPNumber.setText("");
         txtSPrice.setText("");

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,6 +29,8 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
@@ -59,6 +62,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     private TextView txtStock;
     private EditText txtQuantity;
     private EditText txtRemarks;
+    private ConstraintLayout mConsLayout;
 
     private int mTransType = 0;
     private String prodNumber = null;
@@ -121,6 +125,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         txtStock = view.findViewById(R.id.txtStock);
         txtQuantity = view.findViewById(R.id.txtQuantity);
         txtRemarks = view.findViewById(R.id.txtRemarks);
+        mConsLayout = view.findViewById(R.id.constraintLayout);
 
 //        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_selector));
     }
@@ -221,7 +226,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(context, "Transaction done successfully ", Toast.LENGTH_SHORT).show();
+                                        snackBarShow();
                                         clearData();
                                     }
                                 });
@@ -234,6 +239,15 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
                         Toast.makeText(context, "Some error occured ", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void snackBarShow() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
+//        TextView textView = snackbarView.findViewById(android.su)
+        snackbar.show();
     }
 
     private void clearData() {

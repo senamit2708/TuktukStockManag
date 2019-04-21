@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -143,9 +144,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     }
 
     private void reLoadDetails() {
-        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
-//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
-        snackbar.show();
+
         txtType.setText("");
         proAddCard.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
@@ -197,7 +196,7 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-//                                        Toast.makeText(context,"Category added successfully",Toast.LENGTH_SHORT).show();
+                                        snackBarShow();
                                       reLoadDetails();
                                     }
                                 });
@@ -211,6 +210,15 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
                 });
 
 
+    }
+
+    private void snackBarShow() {
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+//        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
+//        TextView textView = snackbarView.findViewById(android.su)
+        snackbar.show();
     }
 
     @Override
