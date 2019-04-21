@@ -33,4 +33,6 @@
     <color name="colorGreen">#FF00FF00</color>
     <color name="colorWhiteGhost">#E1E1E2</color>
     <color name="colorYellowTab">#F27A0C</color>
+    <color name="colorWhiteSmoke">#F5F5F5</color>
+    <color name="colorGrayText">#A8A7A7</color>
 </resources>
