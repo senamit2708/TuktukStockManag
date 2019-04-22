@@ -142,7 +142,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         btnSubmit = view.findViewById(R.id.btnSubmit);
         mConsLayout = view.findViewById(R.id.constraintLayout);
 
-        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_selector));
+//        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_selector));
     }
 
     @Override

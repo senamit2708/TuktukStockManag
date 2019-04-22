@@ -50,6 +50,8 @@ public class TestOneFrag extends Fragment implements TopicIFace {
 //        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
 //            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
 //        }
+
+        //this is for toolbar color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
             ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");

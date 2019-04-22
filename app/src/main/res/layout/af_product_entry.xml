@@ -143,6 +143,9 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:elevation="16dp"
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

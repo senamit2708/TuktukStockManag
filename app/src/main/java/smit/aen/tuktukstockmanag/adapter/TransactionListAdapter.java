@@ -37,11 +37,9 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         holder.txtDate.setText(transList.get(position).getDate());
         holder.txtQuantity.setText("Quantity: "+String.valueOf(transList.get(position).getQuan()));
         if (transList.get(position).getTrans()==1){
-            holder.txtType.setText("IN");
             holder.cardView.setCardBackgroundColor(Color.BLUE);
             holder.txtQuantity.setTextColor(Color.BLUE);
         }else {
-            holder.txtType.setText("OUT");
             holder.cardView.setCardBackgroundColor(Color.GREEN);
             holder.txtQuantity.setTextColor(Color.GREEN);
 
@@ -68,7 +66,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         TextView txtPName;
         TextView txtQuantity;
         TextView txtDate;
-        TextView txtType;
+//        TextView txtType;
         TextView txtPNumber;
         CardView cardView;
 
@@ -78,7 +76,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
             txtPName = itemView.findViewById(R.id.txtPName);
             txtPNumber = itemView.findViewById(R.id.txtPNumber);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
-            txtType = itemView.findViewById(R.id.txtType);
+//            txtType = itemView.findViewById(R.id.txtType);
             cardView = itemView.findViewById(R.id.cardView);
 
         }

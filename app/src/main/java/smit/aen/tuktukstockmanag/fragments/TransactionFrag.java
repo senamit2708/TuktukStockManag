@@ -97,6 +97,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         btnOut.setOnClickListener(this);
         btnIn.setOnClickListener(this);
         btnDate.setOnClickListener(this);
+        btnHome.setOnClickListener(this);
 
         mViewModel.getSelectedProduct().observe(this, new Observer<ProductM>() {
             @Override
@@ -168,7 +169,8 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
             showDatePickerDialog();
         }
         if (v==btnHome){
-
+            clearData();
+            Navigation.findNavController(getActivity(), R.id.btnHome).popBackStack();
         }
         if (v==txtPName){
             Navigation.findNavController(getActivity(), R.id.txtPName).navigate(R.id.action_transactionFrag_to_productSearchListFrag);
