@@ -8,4 +8,8 @@
     <item
         android:id="@+id/productTypeTabFrag"
         android:title="Product Tab"/>
+
+    <item
+        android:id="@+id/sticknoteFrag"
+        android:title="Sticky Notes"/>
 </menu>

@@ -50,6 +50,10 @@ public class LoginViewM extends AndroidViewModel {
         return mob;
     }
 
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
     public String getUserId() {
         return uId;
     }

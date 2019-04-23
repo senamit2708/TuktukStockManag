@@ -46,6 +46,7 @@ public class SignInFrag extends Fragment {
     private static final String PREF_UID = "userId";
     private static final String PREF_RESULT = "result";
     private static final String PREF_CHECK = "check";
+    private static final String PREF_UTYPE="userType";
 
     @Override
     public void onStart() {
@@ -106,6 +107,8 @@ public class SignInFrag extends Fragment {
                 Log.i(TAG, "password is correct");
                 Log.i(TAG, "firebase auth is "+FirebaseAuth.getInstance().getCurrentUser());
                 if (FirebaseAuth.getInstance().getCurrentUser()!= null){
+                    Log.i(TAG, "password matched ");
+                    extractFromSharedPref();
                     Navigation.findNavController(getActivity(), R.id.btnSubmit).popBackStack();
                 }else {
                     Toast.makeText(context, "Correct password, wait to load mobile number", Toast.LENGTH_SHORT).show();
@@ -114,8 +117,16 @@ public class SignInFrag extends Fragment {
             }
         }
         else {
+            Log.i(TAG, "inside no shared pref found method");
             getPassFirebase(uId, password);
         }
+    }
+
+    private void extractFromSharedPref() {
+        String uId = mSharedPref.getString(PREF_UID, "1000");
+        long uType = mSharedPref.getLong(PREF_UTYPE, 10);
+        mViewModel.setuType(uType);
+        mViewModel.setuId(uId);
     }
 
     private void loadDataViewM(String uId, final String password) {

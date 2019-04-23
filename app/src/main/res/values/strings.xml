@@ -6,4 +6,5 @@
     <string name="tab_c_label">Supplier</string>
     <string name="hint_category">Category</string>
     <string name="hint_brand">Brand</string>
+    <string name="stickyHint">Notes</string>
 </resources>

@@ -45,11 +45,11 @@ public class TestOneFrag extends Fragment implements TopicIFace {
     public void onStart() {
         super.onStart();
         //uncomment the below codes
-//        if (!mViewModel.getLogin()){
-//            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
-//        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
-//            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
-//        }
+        if (!mViewModel.getLogin()){
+            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
+        }else if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_signInFrag);
+        }
 
         //this is for toolbar color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){

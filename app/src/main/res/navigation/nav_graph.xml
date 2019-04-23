@@ -116,4 +116,18 @@
             android:id="@+id/action_productListByType_to_productEntryFrag"
             app:destination="@id/productEntryFrag" />
     </fragment>
+    <fragment
+        android:id="@+id/sticknoteFrag"
+        android:name="smit.aen.tuktukstockmanag.fragments.SticknoteFrag"
+        android:label="af_stickynote"
+        tools:layout="@layout/af_stickynote" >
+        <action
+            android:id="@+id/action_sticknoteFrag_to_stickyNotesAdd"
+            app:destination="@id/stickyNotesAdd" />
+    </fragment>
+    <fragment
+        android:id="@+id/stickyNotesAdd"
+        android:name="smit.aen.tuktukstockmanag.fragments.StickyNotesAdd"
+        android:label="af_sticky_notes_add"
+        tools:layout="@layout/af_sticky_notes_add" />
 </navigation>
