@@ -168,7 +168,8 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
             Navigation.findNavController(getActivity(), R.id.btnHome).popBackStack();
         }
         if (v==txtPName){
-            Navigation.findNavController(getActivity(), R.id.txtPName).navigate(R.id.action_transactionFrag_to_productSearchListFrag);
+            mViewModel.setProValForSearch(1);
+            Navigation.findNavController(getActivity(), R.id.txtPName).navigate(R.id.action_transactionFrag_to_productTypeTabFrag);
         }
     }
 
@@ -287,6 +288,13 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
             Toast.makeText(context, "please select IN/OUT", Toast.LENGTH_SHORT).show();
         }
         return status;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "inside on stop method");
+        mViewModel.setSelectedProduct(null);
     }
 
     public static class DatePickerFrag extends DialogFragment implements DatePickerDialog.OnDateSetListener{

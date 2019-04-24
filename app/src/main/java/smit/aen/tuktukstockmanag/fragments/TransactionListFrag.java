@@ -3,6 +3,8 @@ package smit.aen.tuktukstockmanag.fragments;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -31,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.ProductM;
 import smit.aen.tuktukstockmanag.Model.TransactionModel;
+import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
 import smit.aen.tuktukstockmanag.ViewModels.ProductViewM;
 import smit.aen.tuktukstockmanag.ViewModels.TransactionViewM;
@@ -71,6 +75,16 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     //to check submit button is clikced with details..not with previous details
     private boolean statusFromDate=false;
     private boolean statusToDate = false;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //this is for toolbar color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
+        }
+    }
 
     private void bindView(View view) {
 
@@ -253,7 +267,8 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     }
 
     private void selectProduct(View v) {
-        Navigation.findNavController(v).navigate(R.id.action_transactionListFrag_to_productSearchListFrag);
+        mProductViewModel.setProValForSearch(2);
+        Navigation.findNavController(v).navigate(R.id.action_transactionListFrag_to_productTypeTabFrag);
     }
 
     private void clearData() {
@@ -319,6 +334,12 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
     private void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragOne();
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mProductViewModel.setSelectedProduct(null);
     }
 
     public static class DatePickerFragOne extends DialogFragment implements DatePickerDialog.OnDateSetListener{

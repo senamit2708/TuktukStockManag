@@ -3,6 +3,7 @@ package smit.aen.tuktukstockmanag.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,9 +101,13 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             ProductM product = productList.get(adapterPosition);
+
+            if (v==itemView){
+                Log.i(TAG, "inside itemview ");
+                mEditIface.funSearchPro(product);
+            }
             if (v==btnDel){
                     mInterface.funProduct(product);
-
             }
             if (v==btnEdit){
                 mEditIface.funEditPro(product);

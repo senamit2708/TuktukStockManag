@@ -33,6 +33,8 @@ public class ProductViewM extends AndroidViewModel {
     private MutableLiveData<ProductM> mProductSelectedLive= new MutableLiveData<>();
     ListenerRegistration prodListRegistration;
 
+    private int checkProSearch= 0;
+
     public ProductViewM(@NonNull Application application) {
         super(application);
     }
@@ -106,5 +108,16 @@ public class ProductViewM extends AndroidViewModel {
 
     public MutableLiveData<ProductM> getSelectedProduct(){
         return mProductSelectedLive;
+    }
+
+    public void setProValForSearch(int b) {
+        checkProSearch = b;
+        Log.i(TAG, "the value of b is "+b);
+        Log.i(TAG, "the value of checkprosearch in set is "+checkProSearch);
+    }
+
+    public int getProValForSearch(){
+        Log.i(TAG, "the value of checkprosearch in get is "+checkProSearch);
+        return checkProSearch;
     }
 }

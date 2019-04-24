@@ -154,4 +154,9 @@ public class ProductListFrag extends Fragment implements View.OnClickListener, P
     public void funEditPro(ProductM product) {
 
     }
+
+    @Override
+    public void funSearchPro(ProductM productM) {
+
+    }
 }

@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.ProductM;
 import smit.aen.tuktukstockmanag.NavMainActivity;
 import smit.aen.tuktukstockmanag.R;
+import smit.aen.tuktukstockmanag.ViewModels.ProductViewM;
 import smit.aen.tuktukstockmanag.ViewModels.ProductWithTypeViewM;
 import smit.aen.tuktukstockmanag.adapter.ProductListAdap;
 import smit.aen.tuktukstockmanag.adapter.ProductListByTypeAdap;
@@ -54,6 +55,7 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     private Context context;
 
     private ProductWithTypeViewM mViewModel;
+    private ProductViewM mProductViewModel;
 
     private RecyclerView mRecyclerType;
     private ProductListByTypeCatAdap mCatAdapter;
@@ -95,6 +97,7 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(ProductWithTypeViewM.class);
+        mProductViewModel = ViewModelProviders.of(getActivity()).get(ProductViewM.class);
         type = getArguments().getString(SELECT_TYPE, "none");
         fragType = getArguments().getInt(FRAG_TAG, 0);
         Log.i(TAG, "the value of frag tag is "+fragType);
@@ -189,10 +192,10 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     @Override
     public void onStart() {
         super.onStart();
-        Log.i(TAG, "inside on start method");
+        //this is for toolbar color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorBlackForToolbar)));
-            ((NavMainActivity)getActivity()).updateStatusBarColor("#0B0B0B");
+            ((NavMainActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.colorPrimary)));
+            ((NavMainActivity)getActivity()).updateStatusBarColor("#4E0D3A");
         }
     }
 
@@ -222,5 +225,18 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
         Bundle bundle = new Bundle();
         bundle.putInt(ENTRY_CHECK_FRAG, 2);
         Navigation.findNavController(getActivity(), R.id.cardviewAll).navigate(R.id.action_productListByType_to_productEntryFrag, bundle);
+    }
+
+    @Override
+    public void funSearchPro(ProductM productM) {
+        Log.i(TAG, "inside funserach pro  "+mProductViewModel.getProValForSearch() );
+        if (mProductViewModel.getProValForSearch()==2){
+            mProductViewModel.setSelectedProduct(productM);
+            Navigation.findNavController(getActivity(), R.id.cardviewAll).popBackStack(R.id.transactionListFrag, false);
+        }
+        if (mProductViewModel.getProValForSearch()==1){
+            mProductViewModel.setSelectedProduct(productM);
+            Navigation.findNavController(getActivity(), R.id.cardviewAll).popBackStack(R.id.transactionFrag, false);
+        }
     }
 }
