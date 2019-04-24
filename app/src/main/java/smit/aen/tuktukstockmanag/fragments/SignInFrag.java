@@ -179,7 +179,7 @@ public class SignInFrag extends Fragment {
                             String pass = documentSnapshot.getString("pass");
                             if (password.equals(pass)){
                                 mViewModel.setLogin(true);
-                                Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
                                 //details to be kept in LoginViewM for futher reference
                                 String mob = documentSnapshot.getString("mob");
                                 String uId = documentSnapshot.getString("uId");
@@ -195,7 +195,11 @@ public class SignInFrag extends Fragment {
                                 }
 
                             }else {
-                                Toast.makeText(context, "Incorrect password", Toast.LENGTH_SHORT).show();
+                                txtUserName.setText("");
+                                txtPassword.setText("");
+                                btnSubmit.setEnabled(true);
+                                ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+                                Toast.makeText(context, "Incorrect Username/Password", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -220,6 +224,9 @@ public class SignInFrag extends Fragment {
         txtPassword = view.findViewById(R.id.txtPassword);
         btnSubmit = view.findViewById(R.id.btnSubmit);
         ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+        if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            btnSubmit.setText("Sign Up");
+        }
 
 //        btnSignUP = view.findViewById(R.id.btnSignUP);
 //        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.login_button_draw));

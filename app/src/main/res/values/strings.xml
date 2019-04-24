@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TuktukStockManag</string>
+    <string name="app_name">TuktukStock</string>
     <string name="sign_in_headline">Sign In for User</string>
     <string name="tab_a_label">Category</string>
     <string name="tab_b_label">Brand</string>

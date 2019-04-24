@@ -37,11 +37,11 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         holder.txtDate.setText(transList.get(position).getDate());
         holder.txtQuantity.setText("Quantity: "+String.valueOf(transList.get(position).getQuan()));
         if (transList.get(position).getTrans()==1){
-            holder.cardView.setCardBackgroundColor(Color.BLUE);
-            holder.txtQuantity.setTextColor(Color.BLUE);
+            holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorBlue));
+            holder.txtQuantity.setTextColor(context.getResources().getColor(R.color.colorBlue));
         }else {
-            holder.cardView.setCardBackgroundColor(Color.GREEN);
-            holder.txtQuantity.setTextColor(Color.GREEN);
+            holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorGreen));
+            holder.txtQuantity.setTextColor(context.getResources().getColor(R.color.colorGreen));
 
         }
 

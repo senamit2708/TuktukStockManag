@@ -239,7 +239,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
     }
 
     private void snackBarShow() {
-        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(mConsLayout, "Transaction done ", Snackbar.LENGTH_SHORT);
 //        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
@@ -260,7 +260,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         availableQuan = 0;
         prodNumber = null;
         ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorWhite));
-        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorWhite));
+        ViewCompat.setBackgroundTintList(btnOut, ContextCompat.getColorStateList(context, R.color.colorWhite));
 
 //        btnIn.setBackgroundColor(Color.WHITE);
         btnIn.setTextColor(Color.BLACK);

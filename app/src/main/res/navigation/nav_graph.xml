@@ -119,8 +119,8 @@
     <fragment
         android:id="@+id/sticknoteFrag"
         android:name="smit.aen.tuktukstockmanag.fragments.SticknoteFrag"
-        android:label="af_stickynote"
-        tools:layout="@layout/af_stickynote" >
+        android:label="Notes"
+        tools:layout="@layout/af_stickynote">
         <action
             android:id="@+id/action_sticknoteFrag_to_stickyNotesAdd"
             app:destination="@id/stickyNotesAdd" />
@@ -128,6 +128,6 @@
     <fragment
         android:id="@+id/stickyNotesAdd"
         android:name="smit.aen.tuktukstockmanag.fragments.StickyNotesAdd"
-        android:label="af_sticky_notes_add"
+        android:label="Add Note "
         tools:layout="@layout/af_sticky_notes_add" />
 </navigation>

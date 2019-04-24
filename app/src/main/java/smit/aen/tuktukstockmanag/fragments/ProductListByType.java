@@ -20,6 +20,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -111,6 +112,9 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bindView(view);
+
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(type);
 
         cardViewAll.setOnClickListener(this);
 

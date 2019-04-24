@@ -26,11 +26,11 @@
     <color name="colorBlack">#000000</color>
     <color name="colorBlackForToolbar">#0B0B0B</color>
     <color name="colorTry">#5f244d</color>
-    <color name="colorBlue">#FF0000FF</color>
+    <color name="colorBlue">#000099</color>
     <color name="colorGray">#B7B6B6</color>
     <color name="colorRed">#FFFF0000</color>
     <color name="colorTest">#ff5722</color>
-    <color name="colorGreen">#FF00FF00</color>
+    <color name="colorGreen">#006600</color>
     <color name="colorWhiteGhost">#E1E1E2</color>
     <color name="colorYellowTab">#F27A0C</color>
     <color name="colorWhiteSmoke">#F5F5F5</color>

@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +63,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
     private ConstraintLayout mConsLayout;
 
     private int mEditStatus=1;
+    private long quantity =0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,8 +132,9 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtSPrice.setText(String.valueOf(product.getsPrice()));
         mViewModel.setEnterCategory(product.getCat());
         mViewModel.setEnterBrand(product.getBrand());
-//        txtCategory.setText(product.getCat());
-//        txtBrand.setText(product.getBrand());
+        quantity = product.getQuan();
+
+        txtPNumber.setEnabled(false);
     }
 
     private void bindView(View view) {
@@ -194,7 +197,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         mainMap.put("bPrice", bPrice);
         mainMap.put("sPrice", sPrice);
         mainMap.put("des", description);
-        mainMap.put("quan",0);
+        mainMap.put("quan",quantity);
         mainMap.put("aval", true);
         mainMap.put("brand", brnad);
         mainMap.put("cat", cat);
@@ -246,12 +249,23 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
 
     }
     private void snackBarShow() {
-        Snackbar snackbar = Snackbar.make(mConsLayout, "Category Entered Successfully ", Snackbar.LENGTH_SHORT);
+        Snackbar snackbar;
+        if (mEditStatus==2){
+            snackbar = Snackbar.make(mConsLayout, "Product Updated Successfully ", Snackbar.LENGTH_SHORT);
+        }else {
+            snackbar = Snackbar.make(mConsLayout, "Product Entered Successfully ", Snackbar.LENGTH_SHORT);
+        }
 //        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorYellowTab));
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(context.getResources().getColor(R.color.colorBlackForToolbar));
 //        TextView textView = snackbarView.findViewById(android.su)
         snackbar.show();
+
+
+        if (mEditStatus==2){
+            Navigation.findNavController(getActivity(), R.id.btnSubmit).popBackStack();
+        }
+
     }
 
     private void clearDetails() {

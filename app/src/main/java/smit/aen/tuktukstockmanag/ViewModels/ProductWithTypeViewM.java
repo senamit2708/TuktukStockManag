@@ -168,6 +168,7 @@ public class ProductWithTypeViewM extends AndroidViewModel {
                     String name = doc.getString("name");
                     String num = doc.getString("num");
                     String des = doc.getString("des");
+                    Log.i(TAG, "product number is "+num);
                     long quan = doc.getLong("quan");
                     double bPrice = doc.getDouble("bPrice");
                     double sPrice = doc.getDouble("sPrice");
