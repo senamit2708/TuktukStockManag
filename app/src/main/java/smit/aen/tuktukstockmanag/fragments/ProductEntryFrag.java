@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -127,8 +128,10 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         txtDes.setText(product.getDesc());
         txtBRate.setText(String.valueOf(product.getbPrice()));
         txtSPrice.setText(String.valueOf(product.getsPrice()));
-        txtCategory.setText(product.getCat());
-        txtBrand.setText(product.getBrand());
+        mViewModel.setEnterCategory(product.getCat());
+        mViewModel.setEnterBrand(product.getBrand());
+//        txtCategory.setText(product.getCat());
+//        txtBrand.setText(product.getBrand());
     }
 
     private void bindView(View view) {
@@ -142,7 +145,8 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         btnSubmit = view.findViewById(R.id.btnSubmit);
         mConsLayout = view.findViewById(R.id.constraintLayout);
 
-//        btnSubmit.setBackground(ContextCompat.getDrawable(context,R.drawable.submit_button_selector));
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+
     }
 
     @Override
@@ -152,6 +156,7 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
             if (!validate()){
                 return;
             }
+            ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorGray));
             btnSubmit.setEnabled(false);
             loadToFirebase();
         }
@@ -259,6 +264,8 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         mViewModel.setEnterCategory(null);
         mViewModel.setEnterBrand(null);
         btnSubmit.setEnabled(true);
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+
     }
 
     private boolean validate() {
@@ -277,6 +284,14 @@ public class ProductEntryFrag extends Fragment implements View.OnClickListener{
         }
         if (TextUtils.isEmpty(txtSPrice.getText().toString())){
             txtSPrice.setError("REQUIRED");
+            status = false;
+        }
+        if (TextUtils.isEmpty(txtBrand.getText().toString())){
+            txtBrand.setError("REQUIRED");
+            status = false;
+        }
+        if (TextUtils.isEmpty(txtCategory.getText().toString())){
+            txtCategory.setError("REQUIRED");
             status = false;
         }
         return status;

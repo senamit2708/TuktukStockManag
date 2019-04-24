@@ -30,7 +30,6 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
     private ProductIface mInterface;
     private ProEditIface mEditIface;
     private long uType = 0;
-    private int delCount = 0;
 
     public ProductListAdap(Context context, ProductIface mInterface,ProEditIface mEditIface, long uType) {
         this.context = context;
@@ -102,11 +101,8 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
             int adapterPosition = getAdapterPosition();
             ProductM product = productList.get(adapterPosition);
             if (v==btnDel){
-                delCount++;
-                if (delCount>2){
                     mInterface.funProduct(product);
-                    delCount=0;
-                }
+
             }
             if (v==btnEdit){
                 mEditIface.funEditPro(product);

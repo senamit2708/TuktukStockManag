@@ -8,7 +8,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -21,6 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import javax.annotation.Nullable;
+
 import smit.aen.tuktukstockmanag.Model.ProductM;
 
 public class ProductWithTypeViewM extends AndroidViewModel {
@@ -147,33 +152,34 @@ public class ProductWithTypeViewM extends AndroidViewModel {
 
         }
 
-//      prodListReg =
-              query.get()
-              .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                  @Override
-                  public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                      if (task.isSuccessful()){
-                          List<ProductM> productMList = new ArrayList<>();
-                          for (QueryDocumentSnapshot doc : task.getResult()){
-                              String name = doc.getString("name");
-                              String num = doc.getString("num");
-                              String des = doc.getString("des");
-                              long quan = doc.getLong("quan");
-                              double bPrice = doc.getDouble("bPrice");
-                              double sPrice = doc.getDouble("sPrice");
-                              String cat = doc.getString("cat");
-                              String brand = doc.getString("brand");
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e!= null){
+                    Log.w(TAG, "listen failed "+e);
+                    return;
+                }
+                if (value.isEmpty()){
+                    mProductList.setValue(null);
+                }
+                List<ProductM> productMList = new ArrayList<>();
+                for (QueryDocumentSnapshot doc : value){
+                    String name = doc.getString("name");
+                    String num = doc.getString("num");
+                    String des = doc.getString("des");
+                    long quan = doc.getLong("quan");
+                    double bPrice = doc.getDouble("bPrice");
+                    double sPrice = doc.getDouble("sPrice");
+                    String cat = doc.getString("cat");
+                    String brand = doc.getString("brand");
 
-                              productMList.add(new ProductM(name, num, bPrice, sPrice, des, quan, brand, cat));
-                          }
-                          mProductList.setValue(productMList);
+                    productMList.add(new ProductM(name, num, bPrice, sPrice, des, quan, brand, cat));
+                }
+                mProductList.setValue(productMList);
 
-                      }else {
-                          mProductList.setValue(null);
-                      }
-                  }
-              });
-
+            }
+        });
 
 
 //              addSnapshotListener(new EventListener<QuerySnapshot>() {

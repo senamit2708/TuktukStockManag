@@ -54,9 +54,6 @@
             android:id="@+id/action_testOneFrag_to_signInFrag"
             app:destination="@id/signInFrag" />
         <action
-            android:id="@+id/action_testOneFrag_to_productListFrag"
-            app:destination="@id/productListFrag" />
-        <action
             android:id="@+id/action_testOneFrag_to_productEntryFrag"
             app:destination="@id/productEntryFrag" />
         <action
@@ -68,6 +65,9 @@
         <action
             android:id="@+id/action_testOneFrag_to_productTypeTabFrag"
             app:destination="@id/productTypeTabFrag" />
+        <action
+            android:id="@+id/action_testOneFrag_to_sticknoteFrag"
+            app:destination="@id/sticknoteFrag" />
     </fragment>
     <fragment
         android:id="@+id/signInFrag"

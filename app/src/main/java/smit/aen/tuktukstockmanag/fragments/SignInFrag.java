@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -96,8 +97,14 @@ public class SignInFrag extends Fragment {
     }
 
     private void SignIn(String uId, final String password) {
+        Log.i(TAG, "inside signin fun");
+        btnSubmit.setEnabled(false);
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorGray));
+
 
         if (!validateForm()){
+            btnSubmit.setEnabled(true);
+            ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
             return;
         }
         if (mSharedPref.contains(PREF_RESULT)) {
@@ -114,6 +121,10 @@ public class SignInFrag extends Fragment {
                     Toast.makeText(context, "Correct password, wait to load mobile number", Toast.LENGTH_SHORT).show();
                     loadDataViewM(uId, password);
                 }
+            }else {
+                Toast.makeText(context, "Incorrect password ", Toast.LENGTH_SHORT).show();
+                ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+                btnSubmit.setEnabled(true);
             }
         }
         else {
@@ -183,6 +194,8 @@ public class SignInFrag extends Fragment {
 
                                 }
 
+                            }else {
+                                Toast.makeText(context, "Incorrect password", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -206,8 +219,10 @@ public class SignInFrag extends Fragment {
         txtUserName = view.findViewById(R.id.txtUserName);
         txtPassword = view.findViewById(R.id.txtPassword);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+
 //        btnSignUP = view.findViewById(R.id.btnSignUP);
-        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.login_button_draw));
+//        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.login_button_draw));
 
     }
 

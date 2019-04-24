@@ -32,6 +32,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -146,6 +147,8 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
     private void reLoadDetails() {
 
         txtType.setText("");
+        btnAdd.setEnabled(true);
+        ViewCompat.setBackgroundTintList(btnAdd, ContextCompat.getColorStateList(context, R.color.colorYellowTab));
         proAddCard.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         btnCross.setVisibility(View.INVISIBLE);
@@ -158,7 +161,12 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
             txtType.setError("REQUIRED");
             return;
         }
-        type = txtType.getText().toString();
+        ViewCompat.setBackgroundTintList(btnAdd, ContextCompat.getColorStateList(context, R.color.colorGray));
+        btnAdd.setEnabled(false);
+        String firstString = txtType.getText().toString().trim();
+        type = Character.toUpperCase(firstString.charAt(0)) + firstString.substring(1);
+        Log.i(TAG, "the value is "+type);
+
         loadToFirebase();
     }
 
@@ -168,6 +176,9 @@ public class CategotyListFrag extends Fragment implements View.OnClickListener, 
         proAddCard.setVisibility(View.VISIBLE);
         btnCross.setVisibility(View.VISIBLE);
         fabAdd.hide();
+
+        ViewCompat.setBackgroundTintList(btnAdd, ContextCompat.getColorStateList(context, R.color.colorYellowTab));
+
     }
 
     private void loadToFirebase() {

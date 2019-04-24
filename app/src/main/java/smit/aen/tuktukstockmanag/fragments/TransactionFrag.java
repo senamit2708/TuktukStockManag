@@ -127,8 +127,8 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         txtQuantity = view.findViewById(R.id.txtQuantity);
         txtRemarks = view.findViewById(R.id.txtRemarks);
         mConsLayout = view.findViewById(R.id.constraintLayout);
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
 
-//        btnSubmit.setBackground(ContextCompat.getDrawable(context, R.drawable.submit_button_selector));
     }
 
     @Override
@@ -138,29 +138,24 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
             if (!validate()){
                 return;
             }
+            ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorGray));
             btnSubmit.setEnabled(false);
             loadToFirebase();
         }
         if (v==btnIn){
             mTransType = 1;
-//            btnIn.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.colorWhite));
             ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorBlue));
             ViewCompat.setBackgroundTintList(btnOut, ContextCompat.getColorStateList(context, R.color.colorWhite));
 
 
             btnIn.setTextColor(Color.WHITE);
-//            btnIn.setBackgroundColor(Color.BLUE);
-//            btnOut.setBackgroundColor(Color.WHITE);
             btnOut.setTextColor(Color.BLACK);
         }
         if (v==btnOut){
             mTransType = 2;
             ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorWhite));
             ViewCompat.setBackgroundTintList(btnOut, ContextCompat.getColorStateList(context, R.color.colorGreen));
-//            btnOut.setBackgroundColor(Color.RED);
             btnOut.setTextColor(Color.WHITE);
-
-//            btnIn.setBackgroundColor(Color.WHITE);
             btnIn.setTextColor(Color.BLACK);
 
         }
@@ -254,6 +249,7 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
 
     private void clearData() {
         btnSubmit.setEnabled(true);
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
         mViewModel.setSelectedProduct(null);
         txtQuantity.setText("");
         txtRemarks.setText("");
@@ -263,9 +259,12 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         mTransType = 0;
         availableQuan = 0;
         prodNumber = null;
-        btnIn.setBackgroundColor(Color.WHITE);
+        ViewCompat.setBackgroundTintList(btnIn, ContextCompat.getColorStateList(context, R.color.colorWhite));
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorWhite));
+
+//        btnIn.setBackgroundColor(Color.WHITE);
         btnIn.setTextColor(Color.BLACK);
-        btnOut.setBackgroundColor(Color.WHITE);
+//        btnOut.setBackgroundColor(Color.WHITE);
         btnOut.setTextColor(Color.BLACK);
     }
 

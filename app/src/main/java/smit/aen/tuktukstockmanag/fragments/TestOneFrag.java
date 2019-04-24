@@ -84,7 +84,7 @@ public class TestOneFrag extends Fragment implements TopicIFace {
     private void loadTopic() {
         List<TopicMain> topicName = new ArrayList<>();
 
-        topicName.add(new TopicMain("Product",R.drawable.ic_product_three));
+        topicName.add(new TopicMain("Notes",R.drawable.ic_event_note_one));
         topicName.add(new TopicMain("Transaction",R.drawable.ic_transaction_three));
         topicName.add(new TopicMain("New Product",R.drawable.ic_product_white));
         topicName.add(new TopicMain("IN / OUT",R.drawable.ic_transaction_white));
@@ -103,8 +103,8 @@ public class TestOneFrag extends Fragment implements TopicIFace {
 
     @Override
     public void funTopicName(String topic) {
-        if (topic.equals("Product")){
-            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_productListFrag);
+        if (topic.equals("Notes")){
+            Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_sticknoteFrag);
         }
         if (topic.equals("Transaction")){
             Navigation.findNavController(getActivity(), R.id.btnHide).navigate(R.id.action_testOneFrag_to_transactionListFrag);

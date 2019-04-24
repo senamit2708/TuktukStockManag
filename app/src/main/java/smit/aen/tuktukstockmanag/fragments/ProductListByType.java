@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -61,6 +63,7 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     private RecyclerView.LayoutManager mLayoutManager;
 
     private CardView cardViewAll;
+    private ConstraintLayout constraint;
 
     private String type=null;
     private int fragType=0;
@@ -82,6 +85,7 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
         mRecyclerview.setLayoutManager(mLayoutManager);
         mRecyclerview.setAdapter(mAdapter);
 
+        constraint = view.findViewById(R.id.constraint);
         cardViewAll = view.findViewById(R.id.cardviewAll);
         cardViewAll.setBackground(context.getResources().getDrawable(R.drawable.all_select_button_draw));
     }
@@ -145,24 +149,37 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     @Override
     public void funProduct(ProductM product) {
         if (uType==10){
-            db.collection("ProdColl")
-                    .document(product.getNum())
-                    .update("aval", false)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(context, "Product deleted successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Some error occured", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
+            loadSnack(product);
         }
+    }
+
+    private void loadSnack(final ProductM product) {
+        Snackbar snackbar = Snackbar.make(constraint, "Sure want to delete",Snackbar.LENGTH_SHORT);
+        snackbar.setAction("YES", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteProduct(product);
+            }
+        });
+        snackbar.show();
+    }
+
+    private void deleteProduct(ProductM product) {
+        db.collection("ProdColl")
+                .document(product.getNum())
+                .update("aval", false)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Snackbar.make(constraint,"Product deleted successfully", Snackbar.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Snackbar.make(constraint,"Some error occured", Snackbar.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

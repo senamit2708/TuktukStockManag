@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -198,6 +200,9 @@ public class MobileSignInFrag extends Fragment implements View.OnClickListener {
         btnResendOtp = view.findViewById(R.id.btn_resend_otp);
 //        txtStyleEditPhoneNumber = view.findViewById(R.id.txtStyleEditPhoneNumber);
 //        txtStylePhoneOtp = view.findViewById(R.id.txtStylePhoneOtp);
+        ViewCompat.setBackgroundTintList(btnPhoneNumber, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+        ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorGray));
+
     }
 
     @Override
@@ -209,6 +214,9 @@ public class MobileSignInFrag extends Fragment implements View.OnClickListener {
                     Log.i(TAG, "inside the if statement");
                     return;
                 }
+                ViewCompat.setBackgroundTintList(btnPhoneNumber, ContextCompat.getColorStateList(context, R.color.colorGray));
+                ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+
                 Log.i(TAG, "inside the else statement ");
                 String phoneNumberField = mPhoneNumberField.getText().toString();
                 String countryCode = "+91-";

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,6 +25,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -55,6 +57,7 @@ public class SticknoteFrag extends Fragment implements View.OnClickListener, Top
     private SticknoteAdap mAdapter;
 
     private FloatingActionButton fabAdd;
+    private CoordinatorLayout coordinator;
 
 
     @Override
@@ -99,6 +102,7 @@ public class SticknoteFrag extends Fragment implements View.OnClickListener, Top
         mRecyclerView.setAdapter(mAdapter);
 
         fabAdd = view.findViewById(R.id.fabAdd);
+        coordinator = view.findViewById(R.id.coordinator);
     }
 
     @Override
@@ -110,7 +114,19 @@ public class SticknoteFrag extends Fragment implements View.OnClickListener, Top
 
     @Override
     public void funTopicName(String topic) {
-        deleteDoc(topic);
+        loadSnack(topic);
+
+    }
+
+    private void loadSnack(final String topic) {
+        Snackbar snackbar = Snackbar.make(coordinator, "Sure want to delete", Snackbar.LENGTH_SHORT);
+        snackbar.setAction(R.string.done_string, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteDoc(topic);
+            }
+        });
+        snackbar.show();
     }
 
     private void deleteDoc(String topic) {
