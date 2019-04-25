@@ -68,6 +68,7 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
     private CardView cardViewAll;
     private ConstraintLayout constraint;
 
+
     private String type=null;
     private int fragType=0;
     private String selectedItem= "none";
@@ -142,6 +143,10 @@ public class ProductListByType extends Fragment implements TopicIFace, ProductIf
            @Override
            public void onChanged(List<ProductM> productList) {
                mAdapter.setProductList(productList);
+               if (productList==null){
+                   Log.i(TAG, "inside null of productlist");
+                   Toast.makeText(context, "no product available", Toast.LENGTH_SHORT).show();
+               }
            }
        });
     }

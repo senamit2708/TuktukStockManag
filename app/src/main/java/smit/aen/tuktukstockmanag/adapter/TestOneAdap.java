@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import smit.aen.tuktukstockmanag.Model.TopicMain;
 import smit.aen.tuktukstockmanag.R;
@@ -38,6 +40,10 @@ public class TestOneAdap extends RecyclerView.Adapter<TestOneAdap.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtTitle.setText(topicName.get(position).getTopicName());
         holder.txtImageView.setImageResource(topicName.get(position).getImage());
+        if (position==0 || position==3){
+            holder.txtTitle.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+            holder.cardview.setCardBackgroundColor(context.getResources().getColor(R.color.colorGray));
+        }
     }
 
     @Override
@@ -57,11 +63,15 @@ public class TestOneAdap extends RecyclerView.Adapter<TestOneAdap.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtTitle;
         ImageView txtImageView;
+        CardView cardview;
+        ConstraintLayout constraint;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtRecyclerTitle);
             txtImageView = itemView.findViewById(R.id.txtImageView);
+            cardview = itemView.findViewById(R.id.cardview);
+            constraint = itemView.findViewById(R.id.constraint);
             itemView.setOnClickListener(this);
         }
 

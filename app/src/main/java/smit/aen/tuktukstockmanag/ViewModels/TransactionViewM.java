@@ -113,6 +113,9 @@ public class TransactionViewM extends AndroidViewModel {
                     Log.i(TAG, "exception is "+e);
                     return;
                 }
+                if (value.isEmpty()){
+                    mTransSelectedList.setValue(null);
+                }
                 List<TransactionModel> transList = new ArrayList<>();
                 for (QueryDocumentSnapshot doc : value){
                     String name = doc.getString("name");

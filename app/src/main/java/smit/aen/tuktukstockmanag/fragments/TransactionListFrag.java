@@ -307,6 +307,7 @@ public class TransactionListFrag extends Fragment implements View.OnClickListene
                     loadTransTypeList();
                 }else {
                     mAdapter.setTransList(null);
+                    Toast.makeText(context,"No transaction available", Toast.LENGTH_SHORT).show();
                 }
 
 
