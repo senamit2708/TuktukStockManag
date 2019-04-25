@@ -105,9 +105,9 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/Widget.MaterialComponents.CardView"
-                    app:cardElevation="16dp"
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.MaterialComponents.CardView"
+                        app:cardElevation="16dp"
                         android:id="@+id/cardView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -83,8 +83,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="32dp"
-        android:text="Prabhat"
-        android:textColor="@color/colorAccent"
+        android:text="Stationers"
+        android:textColor="@color/colorWhite"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -95,10 +95,11 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="32dp"
-        android:text="Stock"
-        android:textColor="@color/colorAccent"
+        android:text="Hut"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,11 +110,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtNameOne"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtNameOne"
-        app:srcCompat="@drawable/ic_login_logo_one" />
+        app:srcCompat="@drawable/ic_store_four" />
 </androidx.constraintlayout.widget.ConstraintLayout>
