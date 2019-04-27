@@ -30,7 +30,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
     private List<ProductM> productList;
     private ProductIface mInterface;
     private ProEditIface mEditIface;
-    private long uType = 0;
+    private long uType = 10;
 
     public ProductListAdap(Context context, ProductIface mInterface,ProEditIface mEditIface, long uType) {
         this.context = context;
@@ -52,9 +52,11 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         holder.txtQuantity.setText("Quantity: "+String.valueOf(productList.get(position).getQuan()));
         holder.txtPNumber.setText("Number: "+productList.get(position).getNum());
         holder.txtPName.setText(productList.get(position).getName());
-        holder.txtSPrice.setText("Sell Price: "+String.valueOf(productList.get(position).getsPrice()));
-        if (uType==10){
-            holder.txtBPrice.setText("Buy Price: "+String.valueOf(productList.get(position).getbPrice()));
+        if (uType==11){
+            double total = (productList.get(position).getbPrice())*(productList.get(position).getQuan());
+            holder.txtBPrice.setText("Buy Price: "+context.getString(R.string.Rs)+String.valueOf(productList.get(position).getbPrice()));
+            holder.txtSPrice.setText("Sell Price: "+context.getString(R.string.Rs)+String.valueOf(productList.get(position).getsPrice()));
+            holder.txtTotal.setText("Total: "+context.getString(R.string.Rs)+total);
         }
     }
 
@@ -79,6 +81,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
         TextView txtBPrice;
         TextView txtSPrice;
         TextView txtQuantity;
+        TextView txtTotal;
         ImageButton btnDel;
         ImageButton btnEdit;
 
@@ -89,6 +92,7 @@ public class ProductListAdap extends RecyclerView.Adapter<ProductListAdap.ViewHo
             txtPNumber = itemView.findViewById(R.id.txtPNumber);
             txtSPrice = itemView.findViewById(R.id.txtSPrice);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
+            txtTotal = itemView.findViewById(R.id.txtTotal);
             btnDel = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEdit);
 

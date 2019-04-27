@@ -10,4 +10,5 @@
     <string name="mob_hint">Mobile Number</string>
     <string name="otp_hint">OTP</string>
     <string name="done_string">YES</string>
+    <string name="Rs">\u20B9</string>
 </resources>

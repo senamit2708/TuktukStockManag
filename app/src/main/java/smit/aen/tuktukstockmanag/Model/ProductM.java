@@ -15,6 +15,7 @@ public class ProductM{
     boolean aval;
     String brand;
     String cat;
+    long admin;
 
     public ProductM() {
     }
@@ -37,6 +38,14 @@ public class ProductM{
         this.quan = quan;
         this.brand = brand;
         this.cat = cat;
+    }
+
+    public long getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(long admin) {
+        this.admin = admin;
     }
 
     public long getQuan() {

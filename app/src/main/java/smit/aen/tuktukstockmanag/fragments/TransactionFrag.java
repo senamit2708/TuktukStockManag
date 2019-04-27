@@ -187,6 +187,9 @@ public class TransactionFrag extends Fragment implements View.OnClickListener{
         if (mTransType==2){
             if (quan>availableQuan){
                 Toast.makeText(context, "Quantity can't be greater than current stock", Toast.LENGTH_SHORT).show();
+                btnSubmit.setEnabled(true);
+                ViewCompat.setBackgroundTintList(btnSubmit, ContextCompat.getColorStateList(context, R.color.colorPrimaryDark));
+
                 return;
             }
             else {
